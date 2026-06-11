@@ -1,0 +1,105 @@
+/* ── Motion: load reveal, scroll reveal, well animation, keyframes ──── */
+
+/* hero entrance — staggered reveal */
+.anim {
+  opacity: 0;
+  transform: translateY(26px);
+  animation: rise 0.85s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  animation-delay: calc(var(--d, 0) * 0.12s + 0.1s);
+}
+
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* scroll reveal — hidden only when JS works (.js class on <html>) */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--d, 0) * 0.1s);
+}
+
+.js .reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* hero caret */
+.caret { animation: blink 1.1s steps(1) infinite; }
+
+@keyframes blink { 50% { opacity: 0; } }
+
+/* the well: crank turns, bucket bobs */
+.well-scene .crank {
+  transform-origin: 230px 160px;
+  animation: crank-turn 6s ease-in-out infinite;
+}
+
+@keyframes crank-turn {
+  0%, 55%, 100% { transform: rotate(0deg); }
+  70% { transform: rotate(-24deg); }
+  85% { transform: rotate(10deg); }
+}
+
+.well-scene .ropebucket {
+  animation: bucket-bob 6s ease-in-out infinite;
+}
+
+@keyframes bucket-bob {
+  0%, 55%, 100% { transform: translateY(0); }
+  72% { transform: translateY(9px); }
+  86% { transform: translateY(-3px); }
+}
+
+/* header logo — rope sways on hover */
+.brand:hover .mark-rope {
+  animation: rope-sway 0.9s ease-in-out;
+  transform-origin: 32px 35px;
+}
+
+@keyframes rope-sway {
+  30% { transform: rotate(7deg); }
+  65% { transform: rotate(-5deg); }
+}
+
+/* marquee */
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* embers */
+@keyframes ember-rise {
+  0% { opacity: 0; transform: translateY(0) translateX(0); }
+  12% { opacity: 0.9; }
+  60% { opacity: 0.5; }
+  100% {
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--h, 320px))) translateX(var(--x, 14px));
+  }
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .anim, .js .reveal {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    transition: none;
+  }
+
+  .caret,
+  .well-scene .crank,
+  .well-scene .ropebucket,
+  .marquee-track,
+  .embers i {
+    animation: none;
+  }
+
+  .marquee-track { white-space: normal; }
+  .embers { display: none; }
+}
