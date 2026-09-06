@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Social preview — agenticengineer.cz</title>
+  <link rel="stylesheet" href="/css/fonts.css">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/well-3d.css">
+  <style>
+    /* Capture this authoring surface at 1200 × 630 to regenerate assets/og.jpg. */
+    body { width: 1200px; height: 630px; padding: 56px 64px; overflow: hidden; background: radial-gradient(ellipse at 80% 20%, #2b2015, transparent 65%), var(--ink-0); }
+    main { height: 100%; display: grid; grid-template-columns: 1fr 390px; align-items: center; }
+    .name { color: var(--bone-dim); font: 18px var(--font-mono); margin-bottom: 30px; }
+    h1 { font-size: 100px; font-weight: 540; line-height: 0.98; letter-spacing: -0.055em; }
+    h1 em { color: var(--ember); font-weight: 380; }
+    h1 span { display: block; text-transform: uppercase; font-size: 93px; }
+    .description { color: var(--bone-dim); font-size: 23px; margin-top: 30px; }
+    .domain { color: var(--ember); font: 16px var(--font-mono); margin-top: 56px; }
+    .hero-well { position: relative; width: 390px; height: 500px; padding: 0; margin: 0; }
+    .well-fallback { height: 100%; width: 100%; }
+    #wellModel { inset: 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <div>
+      <p class="name">Jiří Studnička</p>
+      <h1><em>Agentic</em><span>Engineer</span></h1>
+      <p class="description">New tools. Deep foundations.</p>
+      <p class="domain">agenticengineer.cz</p>
+    </div>
+    <figure class="hero-well" aria-label="Architectural well model">
+      <div id="wellModel"></div>
+      <img class="well-fallback" src="/assets/well-section.svg" alt="A well with layers of warm stone, bronze metal, and turquoise water.">
+    </figure>
+  </main>
+  <script type="module" src="/js/well-3d.js"></script>
+</body>
+</html>

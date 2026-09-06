@@ -1,0 +1,175 @@
+/* An interactive well within the original amber-and-bone visual identity. */
+.hero-well {
+  padding-bottom: 128px;
+  isolation: isolate;
+}
+
+#wellModel {
+  position: absolute;
+  inset: 0 0 128px;
+  z-index: 2;
+  cursor: grab;
+  touch-action: pan-y pinch-zoom;
+}
+
+#wellModel:active { cursor: grabbing; }
+#wellModel:focus-visible { outline: 1px solid var(--ember); outline-offset: -3px; border-radius: 8px; }
+#wellModel canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 400ms ease; touch-action: pan-y pinch-zoom; }
+.hero-well .well-fallback { display: block; width: 100%; height: auto; transition: opacity 400ms ease; }
+.hero-well.is-3d-ready #wellModel canvas { opacity: 1; }
+.hero-well.is-3d-ready .well-fallback { opacity: 0; }
+
+.well-hint {
+  position: absolute;
+  inset: auto 0 98px;
+  color: var(--muted);
+  font: 400 0.63rem/1.5 var(--font-mono);
+  text-align: center;
+  visibility: hidden;
+}
+.well-hint strong { display: block; color: var(--bone-dim); font-weight: 500; }
+.well-hint > span:not(.sr-only) { display: block; margin-top: 3px; }
+.well-crank, .well-pour {
+  position: absolute;
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  border: 1px solid #ff9e3a70;
+  border-radius: 6px;
+  color: var(--ember);
+  background: #1c171050;
+  cursor: ns-resize;
+  touch-action: none;
+  transition: background 150ms, border-color 150ms;
+}
+.well-crank[hidden], .well-pour[hidden] { display: none; }
+.well-crank svg { width: 30px; height: 30px; stroke: currentColor; stroke-width: 1.2; opacity: 0.7; }
+.well-crank:hover, .well-crank:focus-visible, .well-crank.is-cranking { background: #1c1710b0; border-color: var(--ember); }
+.well-crank:focus-visible { outline: 2px solid var(--ember); outline-offset: 4px; }
+.well-crank.is-cranking { cursor: ns-resize; }
+.well-pour { border-color: #8fd8d080; color: var(--water); border-radius: 50%; cursor: pointer; padding: 9px; }
+.well-pour svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 1.4; }
+.well-pour:hover, .well-pour:focus-visible { background: #0a1413b0; border-color: var(--water); outline-color: var(--water); }
+.hero-well.is-3d-ready .well-hint { visibility: visible; }
+.hero-caption { position: absolute; left: 0; bottom: 60px; max-width: calc(100% - 155px); margin: 0; color: var(--bone-dim); font: 400 0.62rem/1.4 var(--font-mono); }
+
+#wellToggle {
+  position: absolute;
+  right: 0;
+  bottom: 48px;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #1c1710aa;
+  color: var(--ember);
+  font: 400 0.68rem/1.2 var(--font-mono);
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+#wellToggle::before { content: "↓"; font-size: 1rem; }
+#wellToggle[data-direction="up"]::before { content: "↑"; }
+#wellToggle:disabled { opacity: 0.5; cursor: default; }
+#wellToggle:hover { border-color: var(--ember); background: var(--ink-3); }
+#wellToggle:focus-visible { outline: 2px solid var(--ember); outline-offset: 4px; }
+#wellToggle[hidden], #wellLayers[hidden] { display: none; }
+
+/* Callouts follow the opening courses without resizing the canvas. */
+.well-layers { position: absolute; inset: 0 0 128px; z-index: 4; margin: 0; padding: 0; list-style: none; pointer-events: none; }
+.well-layers li {
+  --stage-reveal: 0;
+  position: absolute; left: 0; top: var(--stage-y, 50%); width: 126px;
+  opacity: var(--stage-reveal);
+  transform: translate(calc((1 - var(--stage-reveal)) * 32px), -50%);
+}
+.well-layers li[hidden] { display: none; }
+.well-layers li::after {
+  content: ""; position: absolute; top: 50%; left: 100%; width: 26px; height: 1px;
+  background: var(--ember); opacity: 0.65;
+  transform: scaleX(var(--stage-reveal)); transform-origin: left;
+}
+.well-layers a {
+  display: flex; flex-direction: column; justify-content: center;
+  min-height: 56px; padding: 5px 12px; pointer-events: auto;
+  border-left: 2px solid var(--ember); border-radius: 0 5px 5px 0;
+  background: #1b1710ed; box-shadow: 0 4px 18px #0003;
+}
+.well-layers li[inert] a { pointer-events: none; }
+.well-layers span { font: 400 0.64rem/1.5 var(--font-mono); color: var(--bone-dim); }
+.well-layers strong { font: 500 1.25rem/1.15 var(--font-body); color: var(--ember-soft); }
+.well-layers a:hover, .well-layers a:focus-visible { background: var(--ink-3); outline: 1px solid var(--ember); outline-offset: 3px; }
+.well-layers a:hover strong { color: var(--ember); }
+
+.well-delivery {
+  --delivery-progress: 0;
+  --creation-settle: 0; --creation-glow: 0;
+  position: absolute; z-index: 4;
+  top: var(--creation-y, 70px); left: var(--creation-x, 50%);
+  width: var(--creation-width, 240px); pointer-events: none;
+  opacity: var(--delivery-progress);
+  transform: translate(-50%, -50%) perspective(550px)
+    rotateX(calc((1 - var(--creation-settle)) * 22deg))
+    rotateY(calc((1 - var(--creation-settle)) * -20deg))
+    rotateZ(calc((1 - var(--creation-settle)) * -12deg));
+  filter: drop-shadow(0 8px 16px #0008) drop-shadow(0 0 calc(var(--creation-glow) * 18px) #8fd8d050);
+}
+.well-delivery[hidden] { display: none; }
+.creation-window { display: block; width: 100%; height: auto; overflow: visible; }
+.creation-window text { font: 400 7px var(--font-mono); fill: var(--bone); }
+.creation-backplate { fill: #0d1814; fill-opacity: 0.97; opacity: var(--creation-frame); }
+.creation-outline { fill: none; stroke: var(--water); stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--creation-frame)); }
+.creation-piece {
+  opacity: var(--piece); transform-box: fill-box; transform-origin: center;
+  transform: translate(calc((1 - var(--piece)) * var(--from-x)), calc((1 - var(--piece)) * var(--from-y)))
+    rotate(calc((1 - var(--piece)) * var(--from-angle))) scale(calc(0.65 + var(--piece) * 0.35));
+}
+.creation-pane { fill: #1a2a23; stroke: #8fd8d022; stroke-width: 0.5; }
+.creation-selected { fill: #8fd8d021; }
+.creation-divider { fill: none; stroke: #8fd8d036; stroke-width: 0.7; }
+.creation-code-mark { fill: none; stroke: var(--ember); stroke-width: 1.3; stroke-linecap: round; }
+.creation-window .creation-title { font-size: 10px; }
+.creation-window .creation-section-title { font-size: 8px; }
+.creation-window .creation-muted { fill: #91a396; }
+.creation-muted-line { fill: none; stroke: #8fd8d042; stroke-width: 1.5; stroke-linecap: round; }
+.creation-chart { fill: none; stroke: var(--ember); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.creation-bar { fill: var(--water); opacity: 0.6; }
+.creation-code-line { fill: none; stroke: var(--water); stroke-width: 2; stroke-linecap: round; }
+.creation-code-line.creation-amber { stroke: var(--ember); }
+.creation-ready-dot { fill: var(--water); opacity: var(--creation-verify); }
+.creation-check { fill: none; stroke: var(--water); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--creation-verify)); }
+.creation-window .creation-ready { fill: var(--water); opacity: var(--creation-verify); }
+.creation-sweep { opacity: calc(1 - var(--creation-sweep)); transform: translateX(calc(-58px + var(--creation-sweep) * 340px)); }
+
+.harness-list { display: flex; flex-wrap: wrap; gap: 0.7rem 1.7rem; margin-top: 3rem; padding-block: 1.25rem; border-block: 1px solid var(--line-soft); color: var(--bone-dim); font: 400 0.85rem/1.7 var(--font-mono); }
+html { scroll-padding-top: 84px; }
+
+@media (max-width: 900px) {
+  .hero-well { max-width: 380px; order: 0; margin-top: 0; }
+}
+@media (max-width: 600px) {
+  .hero-well { max-width: 350px; }
+  .hero-caption { max-width: calc(100% - 142px); font-size: 0.58rem; }
+  #wellToggle { padding-inline: 0.6rem; font-size: 0.63rem; }
+  .well-hint { font-size: 0.58rem; }
+  .well-layers li { width: 120px; }
+  .well-layers span { font-size: 0.61rem; }
+}
+@media (pointer: coarse) {
+  /* Only the controls capture touch; the rest of the model scrolls natively. */
+  .well-hint > span:not(.sr-only) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #wellModel canvas, .well-fallback, #wellToggle { transition: none; }
+  .well-layers li { transform: translateY(-50%); }
+  .well-delivery { transform: translate(-50%, -50%); filter: none; }
+  .creation-piece { transform: none; }
+  .creation-sweep { display: none; }
+}

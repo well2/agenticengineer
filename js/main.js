@@ -1,98 +1,73 @@
-/* agenticengineer.cz — scroll reveal, depth gauge, nav state, embers */
+/* agenticengineer.cz — page depth, navigation, and header state. */
 (() => {
   "use strict";
 
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const isCzech = document.documentElement.lang === "cs";
-
-  /* ── reveal on scroll ── */
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in");
-          revealObserver.unobserve(entry.target);
-        }
-      }
-    },
-    { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
-  );
-  document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
-
-  /* ── condensed header after scrolling ── */
   const head = document.getElementById("siteHead");
-  const onHeadScroll = () => head.classList.toggle("scrolled", window.scrollY > 30);
-  window.addEventListener("scroll", onHeadScroll, { passive: true });
-  onHeadScroll();
-
-  /* ── depth gauge: 0 to −42 m mapped to page progress (desktop rail only) ── */
-  const MAX_DEPTH = 42;
-  const railQuery = window.matchMedia("(min-width: 1100px)");
   const readout = document.getElementById("depthReadout");
   const bucket = document.getElementById("railBucket");
+  const year = document.getElementById("year");
+  const railQuery = window.matchMedia("(min-width: 1100px)");
+  const isCzech = document.documentElement.lang === "cs";
+  const links = [...document.querySelectorAll(".nav a[href^='#']")];
+  const destinations = links
+    .map((link) => ({ link, section: document.getElementById(link.hash.slice(1)) }))
+    .filter(({ section }) => section && section.id !== "top");
+  let framePending = false;
 
-  const updateDepth = () => {
-    if (!railQuery.matches) return;
-    const doc = document.documentElement;
-    const max = doc.scrollHeight - window.innerHeight;
-    const progress = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
-    let depth = (progress * MAX_DEPTH).toFixed(1);
-    if (isCzech) depth = depth.replace(".", ",");
-    readout.textContent = `−${depth} m`;
-    bucket.style.transform = `translate(-50%, ${progress * window.innerHeight * 0.84}px)`;
-  };
-  window.addEventListener("scroll", updateDepth, { passive: true });
-  window.addEventListener("resize", updateDepth, { passive: true });
-  updateDepth();
+  function updatePage() {
+    framePending = false;
 
-  /* ── active nav link ── */
-  const navLinks = new Map(
-    [...document.querySelectorAll(".nav a[href^='#']")].map((a) => [a.hash.slice(1), a])
-  );
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        const link = navLinks.get(entry.target.id);
-        if (link && entry.isIntersecting) {
-          navLinks.forEach((a) => a.classList.remove("active"));
-          link.classList.add("active");
-        }
+    const scrollY = Math.max(0, window.scrollY);
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? Math.min(scrollY / maxScroll, 1) : 0;
+    const activationLine = (head?.getBoundingClientRect().height || 0) + 40;
+    let currentLink = null;
+    let latestTop = -Infinity;
+    let lastLink = null;
+    let lastTop = -Infinity;
+
+    // Choose by section position, so navigation order does not affect tracking.
+    for (const { link, section } of destinations) {
+      const { top } = section.getBoundingClientRect();
+      if (top > lastTop) {
+        lastTop = top;
+        lastLink = link;
       }
-    },
-    { rootMargin: "-40% 0px -55% 0px" }
-  );
-  navLinks.forEach((_, id) => {
-    const section = document.getElementById(id);
-    if (section) sectionObserver.observe(section);
-  });
+      if (top <= activationLine && top > latestTop) {
+        latestTop = top;
+        currentLink = link;
+      }
+    }
 
-  /* ── marquee pause toggle (WCAG 2.2.2) ── */
-  const marqueeToggle = document.getElementById("marqueeToggle");
-  if (marqueeToggle) {
-    const marquee = marqueeToggle.closest(".marquee");
-    marqueeToggle.addEventListener("click", () => {
-      const paused = marquee.classList.toggle("paused");
-      marqueeToggle.setAttribute("aria-pressed", String(paused));
-      marqueeToggle.textContent = paused ? "play" : "pause";
-    });
-  }
+    // A short final section may never reach the line below the fixed header.
+    if (maxScroll > 0 && scrollY >= maxScroll - 1) currentLink = lastLink;
 
-  /* ── embers rising from the well ── */
-  const embers = document.getElementById("embers");
-  if (embers && !reducedMotion) {
-    const COUNT = 14;
-    for (let i = 0; i < COUNT; i++) {
-      const e = document.createElement("i");
-      e.style.setProperty("--s", `${2 + Math.random() * 3.5}px`);
-      e.style.setProperty("--t", `${5 + Math.random() * 6}s`);
-      e.style.setProperty("--dl", `${Math.random() * 8}s`);
-      e.style.setProperty("--h", `${240 + Math.random() * 160}px`);
-      e.style.setProperty("--x", `${-30 + Math.random() * 60}px`);
-      e.style.left = `${20 + Math.random() * 60}%`;
-      embers.appendChild(e);
+    head?.classList.toggle("scrolled", scrollY > 30);
+    for (const link of links) {
+      const active = link === currentLink;
+      link.classList.toggle("active", active);
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    }
+
+    if (railQuery.matches) {
+      const depth = (progress * 42).toFixed(1);
+      if (readout) readout.textContent = `−${isCzech ? depth.replace(".", ",") : depth} m`;
+      if (bucket) bucket.style.transform = `translate(-50%, ${progress * window.innerHeight * 0.84}px)`;
     }
   }
 
-  /* ── footer year ── */
-  document.getElementById("year").textContent = new Date().getFullYear();
+  function scheduleUpdate() {
+    if (framePending) return;
+    framePending = true;
+    window.requestAnimationFrame(updatePage);
+  }
+
+  window.addEventListener("scroll", scheduleUpdate, { passive: true });
+  window.addEventListener("resize", scheduleUpdate, { passive: true });
+  window.addEventListener("load", scheduleUpdate);
+  window.addEventListener("pageshow", scheduleUpdate);
+  if (document.fonts) document.fonts.ready.then(scheduleUpdate);
+  if (year) year.textContent = String(new Date().getFullYear());
+  updatePage();
 })();

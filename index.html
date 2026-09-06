@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jiří Studnička — Agentic Engineer</title>
-  <meta name="description" content="20 let seniorního backendového vývoje, 3 roky stavby agentních systémů. Forge, Anvil, Temper a další nástroje, ve kterých AI agenti dodávají produkční software.">
+  <meta name="description" content="Jiří Studnička. Produkční software od roku 2004, agentní systémy od roku 2023. Vlastní nástroje Anvil, Forge a Temper: od zadání k ověřenému kódu.">
   <link rel="canonical" href="https://agenticengineer.cz/">
   <link rel="alternate" hreflang="cs" href="https://agenticengineer.cz/">
   <link rel="alternate" hreflang="en" href="https://agenticengineer.cz/en/">
@@ -12,12 +12,12 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="agenticengineer.cz">
   <meta property="og:title" content="Jiří Studnička — Agentic Engineer">
-  <meta property="og:description" content="Stavím systémy, ve kterých AI agenti píšou, testují a dodávají produkční software. Od GPT-3.5 — dřív, než to bylo cool.">
+  <meta property="og:description" content="Nové nástroje. Hluboké základy. Stavím systémy, ve kterých AI agenti píšou, testují a dodávají software. S odpovědností člověka.">
   <meta property="og:url" content="https://agenticengineer.cz/">
   <meta property="og:image" content="https://agenticengineer.cz/assets/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Agentic Engineer — Jiří Studnička, tmavá stránka s kresbou studny s rumpálem">
+  <meta property="og:image:alt" content="Jiří Studnička — Agentic engineer. Tmavá kompozice s prostorovým modelem studny v jantarových a kamenných tónech.">
   <meta property="og:locale" content="cs_CZ">
   <meta property="og:locale:alternate" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
@@ -30,13 +30,14 @@
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/motion.css">
+  <link rel="stylesheet" href="/css/well-3d.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Jiří Studnička",
     "jobTitle": "Agentic Engineer",
-    "description": "20 let seniorního backendového vývoje, 3 roky stavby agentních systémů, ve kterých AI agenti dodávají produkční software.",
+    "description": "Produkční vývoj od roku 2004 a stavba agentních systémů od roku 2023. AI agenti, ověřitelný výsledek a odpovědnost člověka.",
     "url": "https://agenticengineer.cz/",
     "image": "https://agenticengineer.cz/assets/og.jpg",
     "knowsAbout": ["agentic engineering", "AI agents", "backend development", "functional programming", "big data"],
@@ -50,7 +51,6 @@
     ]
   }
   </script>
-  <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
   <a class="skip mono" href="#main">Přeskočit na obsah</a>
@@ -80,7 +80,7 @@
       <a href="#pribeh">Příběh</a>
       <a href="#kovarna">Kovárna</a>
       <a href="#firmy">Firmy</a>
-      <a href="#dno" class="nav-cta">Dno&nbsp;studny</a>
+      <a href="#dno" class="nav-cta">Kontakt</a>
       <a href="/en/" class="lang-switch" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
     </nav>
   </header>
@@ -96,41 +96,71 @@
             <span class="t1 anim" style="--d:1">Agentic</span>
             <span class="t2 anim" style="--d:2">Engineer</span>
           </h1>
-          <p class="hero-lede anim" style="--d:3">Jsem <strong>Jiří Studnička</strong>. Dvacet let jsem stavěl backendy pro banky, pojišťovny a energetiku. Teď stavím systémy, ve&nbsp;kterých AI&nbsp;agenti píšou, testují a&nbsp;dodávají produkční software — a&nbsp;já ručím za&nbsp;to, že&nbsp;to&nbsp;drží.</p>
-          <p class="hero-tag mono anim" style="--d:4"><span class="amber">//</span> agentní systémy stavím od&nbsp;GPT-3.5 — dřív, než to bylo cool</p>
+          <p class="hero-lede anim" style="--d:3">Jsem <strong>Jiří Studnička</strong>. Dvacet let stavím backendy pro banky, pojišťovny a&nbsp;energetiku. Dnes stavím systémy, ve&nbsp;kterých AI&nbsp;agenti píšou, testují a&nbsp;dodávají produkční software — s&nbsp;jasným zadáním, ověřeným výsledkem a&nbsp;odpovědností člověka.</p>
+          <p class="hero-tag mono anim" style="--d:4"><span class="amber">//</span> v produkci od roku 2004 · s agenty od roku 2023</p>
           <div class="hero-cta anim" style="--d:5">
-            <a class="btn btn-ember" href="#pribeh">Sestoupit do hloubky <span aria-hidden="true">↓</span></a>
-            <a class="btn btn-ghost" href="https://www.linkedin.com/in/jiristudnicka/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span><span class="sr-only">(otevře se v novém okně)</span></a>
+            <a class="btn btn-ember" href="#kovarna">Prohlédnout nástroje <span aria-hidden="true">↓</span></a>
+            <a class="btn btn-ghost" href="#dno">Probrat projekt</a>
           </div>
         </div>
-        <figure class="hero-well anim" style="--d:3" aria-hidden="true">
-          <div class="embers" id="embers"></div>
-          <svg class="well-scene" viewBox="0 0 320 360" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <g stroke="var(--bone)" stroke-width="6">
-              <path d="M20 330 H300"/>
-              <path d="M38 330 c2 -12 10 -16 19 -16 s17 5 19 16"/>
-              <path d="M268 330 l6 -11 M277 330 l4 -8 M262 330 l3 -7"/>
-              <rect x="92" y="232" width="136" height="98" rx="10"/>
-              <path d="M92 265 H228 M92 298 H228"/>
-              <path d="M137 232 V265 M183 232 V265 M115 265 V298 M160 265 V298 M205 265 V298 M137 298 V330 M183 298 V330"/>
-              <path d="M112 232 V118 M208 232 V118"/>
-              <path d="M76 130 L160 64 L244 130"/>
-              <path d="M94 128 L160 78 L226 128"/>
-              <path d="M112 160 H208"/>
-              <g class="crank"><path d="M208 160 H230 M230 160 V186 M230 186 H250"/></g>
-            </g>
-            <g class="ropebucket" stroke="var(--ember)" stroke-width="6">
-              <rect x="138" y="150" width="44" height="20" rx="10"/>
-              <path d="M160 170 V238"/>
-              <path d="M148 250 Q160 234 172 250"/>
-              <path d="M146 250 H174 L170 276 H150 Z"/>
-            </g>
-          </svg>
+        <figure class="hero-well" aria-label="Prostorový model studny: vrstvy zkušeností pod povrchem">
+          <div id="wellModel">
+            <div id="wellCrank" class="well-crank" role="slider" tabindex="0" aria-label="Výška kýble — táhnout nahoru a dolů" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="Kýbl vytažený" aria-orientation="vertical" aria-describedby="wellHint" title="Táhni nahoru nebo dolů" hidden>
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="m11 10 5-5 5 5M16 5v22m-5-5 5 5 5-5"/></svg>
+            </div>
+            <button id="wellPour" class="well-pour" type="button" aria-label="Vylít vodu z kýble" title="Klikni na kýbl a vylij vodu" hidden><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3C10 7 6 11 6 15a6 6 0 0 0 12 0c0-4-4-8-6-12Z"/><path d="M9 15a3 3 0 0 0 3 3"/></svg></button>
+          </div>
+          <p class="well-hint" id="wellHint"><strong id="wellStatus" role="status">Prázdný kýbl. Spusť ho k vodě.</strong><span>Táhni ↕. Studnu otočíš tažením mimo ovládání.</span><span class="sr-only">Výšku kýble ovládají také šipky. Home spustí kýbl k vodě, End ho vytáhne nahoru. Plný kýbl nahoře vyliješ kliknutím.</span></p>
+          <img class="well-fallback" src="/assets/well-section.svg" width="520" height="560" alt="Studna v řezu: nad vrstvami kamene rumpál, v hloubce voda.">
+          <ol class="well-layers" id="wellLayers" aria-label="Pracovní postup uvnitř studny" hidden>
+            <li><a href="#anvil"><span>01 / Zadání</span><strong>Anvil</strong></a></li>
+            <li><a href="#forge"><span>02 / Kód</span><strong>Forge</strong></a></li>
+            <li><a href="#temper"><span>03 / Ověření</span><strong>Temper</strong></a></li>
+          </ol>
+          <div class="well-delivery" id="wellDelivery" role="img" aria-label="Software s budoucností, připravený na další změny. Anvil zpřesňuje zadání, Forge řídí vývoj a review, Temper ověřuje změny. Opora pro dlouhodobou udržovatelnost." aria-hidden="true" hidden>
+            <svg class="creation-window" viewBox="0 0 260 160" aria-hidden="true">
+              <defs><clipPath id="creationClip"><rect x="4" y="4" width="252" height="152" rx="9"/></clipPath><linearGradient id="creationSweep"><stop stop-color="#8fd8d0" stop-opacity="0"/><stop offset=".5" stop-color="#e3fff8" stop-opacity=".6"/><stop offset="1" stop-color="#8fd8d0" stop-opacity="0"/></linearGradient></defs>
+              <rect class="creation-backplate" x="4" y="4" width="252" height="152" rx="9"/>
+              <rect class="creation-outline" x="4" y="4" width="252" height="152" rx="9" pathLength="1"/>
+              <g class="creation-piece creation-chrome" style="--piece:var(--creation-part-0);--from-x:-38px;--from-y:110px;--from-angle:-14deg">
+                <path class="creation-divider" d="M4 33h252"/>
+                <path class="creation-code-mark" d="m22 14-5 5 5 5m15-10 5 5-5 5m-7-12-3 16"/>
+                <text class="creation-title" x="52" y="22">Software s budoucností</text>
+                <circle class="creation-ready-dot" cx="238" cy="19" r="3"/>
+              </g>
+              <g class="creation-piece creation-sidebar" style="--piece:var(--creation-part-1);--from-x:-62px;--from-y:90px;--from-angle:12deg">
+                <rect class="creation-pane" x="13" y="43" width="50" height="104" rx="4"/>
+                <rect class="creation-selected" x="18" y="51" width="40" height="17" rx="3"/>
+                <text x="23" y="62">Anvil</text><text x="23" y="86">Forge</text><text x="23" y="110">Temper</text>
+                <path class="creation-divider" d="M22 132h30"/>
+              </g>
+              <g class="creation-piece creation-main" style="--piece:var(--creation-part-2);--from-x:52px;--from-y:145px;--from-angle:-9deg">
+                <rect class="creation-pane" x="72" y="43" width="175" height="58" rx="4"/>
+                <text class="creation-section-title" x="82" y="58">Připravený na další změnu</text>
+                <path class="creation-muted-line" d="M82 65h49"/>
+                <path class="creation-chart" d="m153 87 16-10 15 4 17-15 15 4 17-16"/>
+                <rect class="creation-bar" x="83" y="81" width="12" height="12" rx="2"/><rect class="creation-bar" x="101" y="74" width="12" height="19" rx="2"/><rect class="creation-bar" x="119" y="68" width="12" height="25" rx="2"/>
+              </g>
+              <g class="creation-piece creation-code" style="--piece:var(--creation-part-3);--from-x:-34px;--from-y:125px;--from-angle:16deg">
+                <rect class="creation-pane" x="72" y="108" width="94" height="39" rx="4"/>
+                <text class="creation-muted creation-filename" x="81" y="119">změny + review</text>
+                <path class="creation-code-line" d="M82 127h12m-7 7h27m9-7h14"/><path class="creation-code-line creation-amber" d="M101 127h13m10 7h27"/>
+              </g>
+              <g class="creation-piece creation-result" style="--piece:var(--creation-part-4);--from-x:53px;--from-y:115px;--from-angle:-18deg">
+                <rect class="creation-pane" x="174" y="108" width="73" height="39" rx="4"/>
+                <path class="creation-check" d="m185 127 5 5 9-11" pathLength="1"/>
+                <text class="creation-ready" x="202" y="131">Ověřeno</text>
+              </g>
+              <g clip-path="url(#creationClip)"><path class="creation-sweep" fill="url(#creationSweep)" d="M0 0h24l34 160H34Z"/></g>
+            </svg>
+          </div>
+          <figcaption class="hero-caption">Studnička. Pod povrchem.</figcaption>
+          <button id="wellToggle" type="button" aria-controls="wellLayers" hidden>Spustit kýbl</button>
         </figure>
       </div>
       <ul class="hero-stats anim" style="--d:6" role="list">
         <li><strong>20+</strong><span>let v&nbsp;produkčním kódu</span></li>
-        <li><strong>3</strong><span>roky agentic engineeringu</span></li>
+        <li><strong>2023</strong><span>začátek agentic engineeringu</span></li>
         <li><strong>8+</strong><span>vlastních agentních systémů</span></li>
         <li><strong>2</strong><span>softwarové firmy</span></li>
       </ul>
@@ -154,16 +184,10 @@
       </ol>
 
       <blockquote class="pull-quote reveal">
-        <p>„Většina AI&nbsp;inženýrů včera objevila Claude&nbsp;Code. Já mezitím řeším, jak udržet flotilu agentů tři dny v&nbsp;kuse na&nbsp;produkčním repu.“</p>
+        <p>„Moje práce je dát agentům jasné zadání, udržet kontext a&nbsp;ověřit, že výsledek obstojí v&nbsp;produkci.“</p>
       </blockquote>
 
-      <div class="marquee reveal" role="group" aria-label="Harnessy, kterými jsem prošel">
-        <button class="marquee-toggle mono" type="button" aria-pressed="false" id="marqueeToggle">pause</button>
-        <div class="marquee-track mono">
-          <span>GPT-3.5</span><span>Cline</span><span>Roo&nbsp;Code</span><span>Augment&nbsp;Code</span><span>Claude&nbsp;Code</span><span>Codex</span><span>OpenCode</span><span>vlastní orchestrace</span><span>…a&nbsp;hromada těch, co&nbsp;si&nbsp;už&nbsp;nikdo nepamatuje</span>
-          <span aria-hidden="true">GPT-3.5</span><span aria-hidden="true">Cline</span><span aria-hidden="true">Roo&nbsp;Code</span><span aria-hidden="true">Augment&nbsp;Code</span><span aria-hidden="true">Claude&nbsp;Code</span><span aria-hidden="true">Codex</span><span aria-hidden="true">OpenCode</span><span aria-hidden="true">vlastní orchestrace</span><span aria-hidden="true">…a&nbsp;hromada těch, co&nbsp;si&nbsp;už&nbsp;nikdo nepamatuje</span>
-        </div>
-      </div>
+      <div class="harness-list" aria-label="Nástroje, se kterými pracuji"><span>Claude Code</span><span>Codex</span><span>Cline</span><span>Roo Code</span><span>Augment Code</span><span>OpenCode</span></div>
       <div class="strata-edge" aria-hidden="true"></div>
     </section>
 
@@ -174,25 +198,25 @@
       <p class="section-lede reveal">Svoje nástroje jsem pojmenoval podle kovárny. Ne&nbsp;kvůli romantice — protože agentic engineering je <strong>řemeslo</strong>: má postup, nástroje a&nbsp;kontrolu kvality. Tohle je můj výrobní cyklus.</p>
 
       <div class="pipeline">
-        <article class="tool-card t-major reveal" style="--d:0">
+        <article id="anvil" class="tool-card t-major reveal" style="--d:0">
           <p class="tool-step mono">01 · kovadlina</p>
           <h3>Anvil</h3>
           <p class="tool-io mono">issue&nbsp;→&nbsp;spec</p>
-          <p>Vykove ze&nbsp;syrového GitHub issue spec připravený k&nbsp;implementaci. Agenti čtou zadání proti reálnému kódu, hledají díry a&nbsp;nejasnosti — a&nbsp;každý zápis schvaluje člověk.</p>
+          <p>Čte zadání proti skutečnému kódu. Najde nejasnosti a&nbsp;chybějící souvislosti dřív, než se začne implementovat. Změny zadání schvaluje člověk.</p>
           <ul class="chips mono" role="list"><li>read-only analýza</li><li>human-in-the-loop</li></ul>
         </article>
-        <article class="tool-card t-major reveal" style="--d:1">
+        <article id="forge" class="tool-card t-major reveal" style="--d:1">
           <p class="tool-step mono">02 · výheň</p>
           <h3>Forge</h3>
           <p class="tool-io mono">issue&nbsp;→&nbsp;pull&nbsp;request</p>
-          <p>Orchestrační platforma: agenti projdou spec, implementaci, code review, validaci i&nbsp;CI&nbsp;smyčky — až&nbsp;po&nbsp;merge a&nbsp;kontrolu po&nbsp;něm. Žádné „věřte&nbsp;nám“: každý požadavek má svůj ledger.</p>
-          <ul class="chips mono" role="list"><li>27stavový state&nbsp;machine</li><li>requirement ledger</li><li>50+ CLI příkazů</li></ul>
+          <p>Řídí agenty od implementace přes code review až po&nbsp;testy a&nbsp;CI. Sleduje splnění požadavků, koordinuje opravy a&nbsp;ověřuje výsledek po&nbsp;merge.</p>
+          <ul class="chips mono" role="list"><li>code review</li><li>testy a CI</li><li>requirement ledger</li></ul>
         </article>
-        <article class="tool-card t-major reveal" style="--d:2">
+        <article id="temper" class="tool-card t-major reveal" style="--d:2">
           <p class="tool-step mono">03 · kalení</p>
           <h3>Temper</h3>
           <p class="tool-io mono">PR&nbsp;→&nbsp;důkaz</p>
-          <p>Self-healing testování v&nbsp;reálném prohlížeči. Když selektor ujede, agent pochopí původní záměr, test doběhne — a&nbsp;scénář se&nbsp;sám opraví, aby příště běžel deterministicky.</p>
+          <p>Testuje v&nbsp;reálném prohlížeči a&nbsp;zachycuje jednotlivé kroky. Když se rozhraní změní, agent pomáhá opravit scénář pro další opakovatelný běh.</p>
           <ul class="chips mono" role="list"><li>screenshot každého kroku</li><li>samoopravné scénáře</li></ul>
         </article>
       </div>
@@ -200,22 +224,22 @@
       <div class="tool-grid">
         <article class="tool-card reveal" style="--d:0">
           <h3>CogneraSpec</h3>
-          <p>Spec-driven CLI, které drží agenty za&nbsp;slovo: každý požadavek má stabilní REQ-ID a&nbsp;ověřitelnou evidenci v&nbsp;testech. Drift mezi specem a&nbsp;realitou se měří, ne&nbsp;tuší.</p>
+          <p>Propojuje požadavky s&nbsp;kódem a&nbsp;testy. Každý má vlastní REQ-ID a&nbsp;ověřitelnou evidenci. Rozdíl mezi zadáním a&nbsp;výsledkem je vidět.</p>
         </article>
         <article class="tool-card reveal" style="--d:1">
           <h3>AI Toolkit</h3>
-          <p>Knihovna 59&nbsp;příkazů a&nbsp;25&nbsp;skillů pro Claude&nbsp;Code a&nbsp;Codex — párované audity a&nbsp;opravy pro security, performance, a11y a&nbsp;další. Standardizace agentních workflow.</p>
+          <p>Příkazy a&nbsp;skilly pro Claude Code a&nbsp;Codex. Opakovatelné postupy pro kontrolu a&nbsp;opravy bezpečnosti, výkonu i&nbsp;přístupnosti.</p>
         </article>
         <article class="tool-card reveal" style="--d:2">
           <h3>Meeting Agent</h3>
-          <p>Záznam z&nbsp;meetingu&nbsp;→ hotové GitHub issues. Gemini čte video včetně obrazovky, Claude píše issues v&nbsp;kontextu repozitáře, screenshoty se přiloží samy.</p>
+          <p>Ze záznamu schůzky připraví GitHub issues v&nbsp;kontextu repozitáře. Včetně toho, co zaznělo i&nbsp;co bylo vidět na&nbsp;obrazovce.</p>
         </article>
       </div>
       <p class="tool-more mono reveal">…a&nbsp;další: agent-system (orchestrace přes Telegram), MCP&nbsp;servery, invoiceAI.</p>
 
       <div class="principles reveal">
         <div><span class="mono amber">01</span><p><strong>Spec-first.</strong> Agent bez pořádného zadání je generátor náhodného kódu.</p></div>
-        <div><span class="mono amber">02</span><p><strong>Důkaz, ne&nbsp;dojem.</strong> Každý požadavek má test, evidenci a&nbsp;screenshot.</p></div>
+        <div><span class="mono amber">02</span><p><strong>Důkaz, ne&nbsp;dojem.</strong> Každý požadavek propojuji s&nbsp;testy a&nbsp;ověřitelnou evidencí.</p></div>
         <div><span class="mono amber">03</span><p><strong>Human-in-the-loop.</strong> AI&nbsp;píše. Senior ručí.</p></div>
       </div>
       <div class="strata-edge" aria-hidden="true"></div>
@@ -247,7 +271,7 @@
       <div class="waterline" aria-hidden="true"></div>
       <p class="depth-mark mono reveal"><span class="water-c">//</span> hloubka −42&nbsp;m · hladina</p>
       <h2 class="reveal">Na&nbsp;dně každé studny je <em>voda</em></h2>
-      <p class="section-lede reveal">Hledáte někoho, kdo agentní vývoj opravdu provozuje — ne&nbsp;o&nbsp;něm jen píše na&nbsp;LinkedIn? Spusťte kbelík.</p>
+      <p class="section-lede reveal">Máte projekt, do&nbsp;kterého chcete zapojit AI&nbsp;agenty? Napište, co stavíte, kde se vývoj zadrhává a&nbsp;co potřebujete změnit.</p>
       <div class="contact-links reveal">
         <a class="btn btn-water" href="https://www.linkedin.com/in/jiristudnicka/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span><span class="sr-only">(otevře se v novém okně)</span></a>
         <a class="btn btn-water" href="https://github.com/well2" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span><span class="sr-only">(otevře se v novém okně)</span></a>
@@ -261,9 +285,10 @@
       <path d="M10 24 L32 9 L54 24"/><path d="M16 24 V42 M48 24 V42"/><path d="M16 31 H48"/><rect x="25" y="26.5" width="14" height="9" rx="4.5"/><path d="M48 31 H54 V38 H59"/><path d="M32 35.5 V47"/><rect x="13" y="42" width="38" height="15" rx="3"/><path d="M13 49.5 H51 M25 42 V49.5 M39 42 V49.5 M32 49.5 V57"/>
     </svg>
     <p class="mono">© <span id="year">2026</span> Jiří Studnička · agenticengineer.cz</p>
-    <p class="mono foot-note">Tenhle web napsal AI&nbsp;agent. Samozřejmě.</p>
+    <p class="mono foot-note">Postaveno s AI. Promyšleno člověkem.</p>
   </footer>
 
   <script src="/js/main.js" defer></script>
+  <script type="module" src="/js/well-3d.js"></script>
 </body>
 </html>
