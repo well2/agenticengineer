@@ -7,8 +7,9 @@
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#0c0a07">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/css/fonts.css">
+  <link rel="stylesheet" href="/css/fonts.css?v=2d51ff3495d9">
   <style>
+    * { box-sizing: border-box; }
     body {
       margin: 0; min-height: 100svh; display: grid; place-items: center;
       background: #0c0a07; color: #ece2cd; text-align: center;
@@ -27,7 +28,10 @@
     <h1>404</h1>
     <p>Tahle studna je suchá. Voda je zpátky na hlavní stránce.</p>
     <p class="en" lang="en">This well is dry. The water is back on the main page.</p>
-    <a href="/">← Zpátky ke studni</a>
+    <nav aria-label="Návrat na hlavní stránku / Return home">
+      <a href="/">← Česká stránka</a>
+      <a href="/en/" lang="en" hreflang="en">English homepage →</a>
+    </nav>
   </main>
 </body>
 </html>

@@ -253,7 +253,7 @@ main > section {
 }
 
 @media (max-width: 900px) {
-  .hero-inner { grid-template-columns: 1fr; }
+  .hero-inner { grid-template-columns: minmax(0, 1fr); }
   .hero-well { max-width: 170px; order: -1; margin-top: 0.5rem; }
   .hero-stats { grid-template-columns: repeat(2, 1fr); }
 }
@@ -354,5 +354,5 @@ main > section {
 .site-foot .foot-note {
   margin-top: 0.4rem;
   color: var(--water);
-  opacity: 0.6;
+  opacity: 0.8;
 }

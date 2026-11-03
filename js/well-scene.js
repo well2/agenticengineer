@@ -3,6 +3,7 @@ import { getPourPose, getPourWaterProgress } from './well-water-state.mjs';
 import { createWellPourEffects } from './well-pour-effects.js';
 import { createWellTransformationEffects } from './well-transformation-effects.js';
 import { createWellCanopy } from './well-canopy.js';
+import { getCourseHeight, WELL_COURSES } from './well-layout.mjs';
 
 export function createWellScene(THREE) {
     const scene = new THREE.Scene();
@@ -45,21 +46,22 @@ export function createWellScene(THREE) {
         shape.closePath();
         const geometry = new THREE.ExtrudeGeometry(shape, {
             depth: height, bevelEnabled: true, bevelSegments: 2,
-            steps: 1, bevelSize: 0.017, bevelThickness: 0.018, curveSegments: 12,
+            steps: 1, bevelSize: 0.017, bevelThickness: Math.min(0.018, height * 0.08), curveSegments: 12,
         });
         geometry.rotateX(-Math.PI / 2);
         return geometry;
     }
 
-    const courses = Array.from({ length: 4 }, (_, layer) => {
+    const courses = Array.from({ length: WELL_COURSES.count }, (_, layer) => {
         const group = new THREE.Group();
+        group.name = `well-course-${layer}`;
         sculpture.add(group);
         const sections = 10;
         const width = Math.PI * 2 / sections;
         for (let segment = 0; segment < sections; segment++) {
             const start = segment * width + (layer % 2) * width / 2;
-            const radius = layer === 3 ? 1.23 : 1.16;
-            const geometry = stoneArc(start + 0.007, start + width - 0.007, radius, 0.8, 0.285);
+            const radius = layer === WELL_COURSES.count - 1 ? 1.23 : 1.16;
+            const geometry = stoneArc(start + 0.007, start + width - 0.007, radius, 0.8, getCourseHeight(layer));
             mesh(geometry, stones[(segment + layer) % stones.length], group);
         }
         return group;

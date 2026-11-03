@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
   <title>Social preview — agenticengineer.cz</title>
-  <link rel="stylesheet" href="/css/fonts.css">
-  <link rel="stylesheet" href="/css/tokens.css">
-  <link rel="stylesheet" href="/css/well-3d.css">
+  <link rel="stylesheet" href="/css/fonts.css?v=2d51ff3495d9">
+  <link rel="stylesheet" href="/css/tokens.css?v=7466bd0caab1">
+  <link rel="stylesheet" href="/css/well-3d.css?v=71fdec345681">
   <style>
     /* Capture this authoring surface at 1200 × 630 to regenerate assets/og.jpg. */
     body { width: 1200px; height: 630px; padding: 56px 64px; overflow: hidden; background: radial-gradient(ellipse at 80% 20%, #2b2015, transparent 65%), var(--ink-0); }
@@ -19,9 +19,32 @@
     .description { color: var(--bone-dim); font-size: 23px; margin-top: 30px; }
     .domain { color: var(--ember); font: 16px var(--font-mono); margin-top: 56px; }
     .hero-well { position: relative; width: 390px; height: 500px; padding: 0; margin: 0; }
-    .well-fallback { height: 100%; width: 100%; }
     #wellModel { inset: 0; }
   </style>
+  <script type="importmap" id="asset-importmap">
+  {
+    "imports": {
+      "/js/main.js": "/js/main.js?v=f9f6590f64f9",
+      "/js/well-3d.js": "/js/well-3d.js?v=705f0d927e38",
+      "/js/well-bucket-control.js": "/js/well-bucket-control.js?v=c008618ded49",
+      "/js/well-canopy.js": "/js/well-canopy.js?v=861c8a9d42b6",
+      "/js/well-controls.js": "/js/well-controls.js?v=bd5d74798ea3",
+      "/js/well-delivery.js": "/js/well-delivery.js?v=2148109b4a25",
+      "/js/well-hoist.js": "/js/well-hoist.js?v=e07d1a84c8b4",
+      "/js/well-layout.mjs": "/js/well-layout.mjs?v=c024e3f0dbfe",
+      "/js/well-pour-effects.js": "/js/well-pour-effects.js?v=11849aee320e",
+      "/js/well-scene.js": "/js/well-scene.js?v=695e36530955",
+      "/js/well-stages.js": "/js/well-stages.js?v=71c3effb22ff",
+      "/js/well-start.js": "/js/well-start.js?v=22cda31a59af",
+      "/js/well-transformation-effects.js": "/js/well-transformation-effects.js?v=e9a5a46eb858",
+      "/js/well-water-state.mjs": "/js/well-water-state.mjs?v=a19e6ca43a29",
+      "/js/well-winding.js": "/js/well-winding.js?v=e86aaf5a6b3b",
+      "/vendor/three/OrbitControls.min.js": "/vendor/three/OrbitControls.min.js?v=10cc619d5a4d",
+      "/vendor/three/three.core.min.js": "/vendor/three/three.core.min.js?v=05b2609338c7",
+      "/vendor/three/three.module.min.js": "/vendor/three/three.module.min.js?v=86bcee248b64"
+    }
+  }
+  </script>
 </head>
 <body>
   <main>
@@ -33,9 +56,11 @@
     </div>
     <figure class="hero-well" aria-label="Architectural well model">
       <div id="wellModel"></div>
-      <img class="well-fallback" src="/assets/well-section.svg" alt="A well with layers of warm stone, bronze metal, and turquoise water.">
     </figure>
   </main>
-  <script type="module" src="/js/well-3d.js"></script>
+  <script type="module">
+    import { initialize } from "/js/well-3d.js";
+    initialize();
+  </script>
 </body>
 </html>

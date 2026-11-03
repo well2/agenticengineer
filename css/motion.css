@@ -2,6 +2,9 @@
 .hero-inner { animation: arrive 700ms ease-out both; }
 @keyframes arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 .btn, .text-link, .nav a, .firm-card, .contact-email { transition: color 160ms, background-color 160ms, border-color 160ms; }
+@media (max-width: 900px) {
+  .grain { display: none; }
+}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }

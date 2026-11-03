@@ -1,0 +1,47 @@
+# Jiří Studnička — Agentic Engineer
+
+> Personal website of Jiří Studnička. He designs AI agents, multi-agent systems and software development automation. Production software experience since 2004; agentic systems since 2023. Co-owner of Cognera and nopShop Solutions.
+
+## Primary pages
+
+- [Český profil a spolupráce](https://agenticengineer.cz/): Agentní systémy, automatizace vývoje softwaru, AI integrace a ověřování.
+- [English profile and services](https://agenticengineer.cz/en/): Agentic system design, software development automation, AI integration and verification.
+- [Cognera ecosystem](https://agenticengineer.cz/en/#kovarna): Roles of the six applications and three shared foundations.
+- [Practical questions](https://agenticengineer.cz/en/#otazky): Scope, ways to collaborate, quality and autonomy.
+- [Contact](https://agenticengineer.cz/en/#dno): Discuss a project via info@cognera.cz or LinkedIn.
+
+## What Jiří works on
+
+- Agent roles, context, tool integration, permissions, handoffs and supervision.
+- Requirements, implementation, code review, tests, CI/CD and deployment.
+- Connecting repositories, APIs and business tools, including Model Context Protocol (MCP).
+- Browser and API acceptance, accessibility checks and traceable verification evidence.
+
+## Personal tool progression
+
+After starting with AI in 2023, Jiří progressively adopted Cline, Roo Code, Augment Code, Claude Code, Codex and OpenCode, in that order. Claude Code, Codex and OpenCode are the current stage of his toolkit. This is a personal adoption sequence, not a list of release dates.
+
+## The Cognera workshop
+
+Smithy coordinates the workflow; specialist applications own their work.
+
+- Smithy: coordination, project context, open questions and stage results.
+- Bellows: opportunity research and source-backed proposals.
+- Anvil: code-aware requirements analysis and implementation readiness.
+- Forge: AI-assisted implementation, review, tests and CI fixes, including work across repositories.
+- Temper: independent browser and API verification, with visual and accessibility checks as applicable.
+- Rivet: deployment planning, required approvals, runtime verification and infrastructure visibility.
+- Cognera Harness: shared tool, model and reasoning-effort selection under task requirements and policies; execution remains with the application.
+- Cognera Supervisor: shared supervision and controlled recovery within application permissions.
+- CogneraSpec: traceability between specifications, tasks and verification evidence.
+
+This is an evolving development environment. Project deployment and autonomy depend on permissions and verified capabilities. The site does not claim guaranteed cost savings, universal correctness or fully autonomous production operation. Internal implementation details are not part of this public overview.
+
+## Public identity
+
+- [LinkedIn](https://www.linkedin.com/in/jiristudnicka/)
+- [GitHub](https://github.com/well2)
+- [Cognera](https://cognera.cz/)
+- [nopShop Solutions](https://www.nopshop.cz/)
+
+Content reviewed: 2026-11-03. The Czech and English HTML pages are the primary public descriptions. This optional text index summarizes the same visible content; it is not a separate product specification.

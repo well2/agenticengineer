@@ -1,12 +1,15 @@
 /* An interactive well within the original amber-and-bone visual identity. */
 .hero-well {
-  padding-bottom: 128px;
+  --well-model-top: 52px;
+  min-width: 0;
+  padding-top: var(--well-model-top);
+  padding-bottom: 216px;
   isolation: isolate;
 }
 
 #wellModel {
   position: absolute;
-  inset: 0 0 128px;
+  inset: var(--well-model-top) 0 216px;
   z-index: 2;
   cursor: grab;
   touch-action: pan-y pinch-zoom;
@@ -15,13 +18,12 @@
 #wellModel:active { cursor: grabbing; }
 #wellModel:focus-visible { outline: 1px solid var(--ember); outline-offset: -3px; border-radius: 8px; }
 #wellModel canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 400ms ease; touch-action: pan-y pinch-zoom; }
-.hero-well .well-fallback { display: block; width: 100%; height: auto; transition: opacity 400ms ease; }
+.hero-well::before { content: ""; display: block; width: 100%; aspect-ratio: 13 / 14; min-height: 360px; }
 .hero-well.is-3d-ready #wellModel canvas { opacity: 1; }
-.hero-well.is-3d-ready .well-fallback { opacity: 0; }
 
 .well-hint {
   position: absolute;
-  inset: auto 0 98px;
+  inset: auto 0 166px;
   color: var(--muted);
   font: 400 0.63rem/1.5 var(--font-mono);
   text-align: center;
@@ -54,12 +56,30 @@
 .well-pour svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 1.4; }
 .well-pour:hover, .well-pour:focus-visible { background: #0a1413b0; border-color: var(--water); outline-color: var(--water); }
 .hero-well.is-3d-ready .well-hint { visibility: visible; }
-.hero-caption { position: absolute; left: 0; bottom: 60px; max-width: calc(100% - 155px); margin: 0; color: var(--bone-dim); font: 400 0.62rem/1.4 var(--font-mono); }
+.well-load-status {
+  position: absolute;
+  inset: calc(var(--well-model-top) + (100% - var(--well-model-top) - 216px) / 2) 0 auto;
+  transform: translateY(-50%);
+  padding-inline: 1rem;
+  color: var(--bone-dim);
+  font: 400 0.72rem/1.5 var(--font-mono);
+  text-align: center;
+}
+.well-load-status a { color: var(--ember); text-decoration: underline; }
+.hero-well:not(.is-3d-ready) #wellModel { pointer-events: none; }
+.hero-well.is-3d-ready .well-load-status {
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.hero-caption { position: absolute; left: 0; bottom: 128px; max-width: calc(100% - 155px); margin: 0; color: var(--bone-dim); font: 400 0.62rem/1.4 var(--font-mono); }
 
 #wellToggle {
   position: absolute;
   right: 0;
-  bottom: 48px;
+  bottom: 116px;
   z-index: 4;
   display: inline-flex;
   align-items: center;
@@ -83,7 +103,7 @@
 #wellToggle[hidden], #wellLayers[hidden] { display: none; }
 
 /* Callouts follow the opening courses without resizing the canvas. */
-.well-layers { position: absolute; inset: 0 0 128px; z-index: 4; margin: 0; padding: 0; list-style: none; pointer-events: none; }
+.well-layers { position: absolute; inset: var(--well-model-top) 0 216px; z-index: 4; margin: 0; padding: 0; list-style: none; pointer-events: none; }
 .well-layers li {
   --stage-reveal: 0;
   position: absolute; left: 0; top: var(--stage-y, 50%); width: 126px;
@@ -92,9 +112,9 @@
 }
 .well-layers li[hidden] { display: none; }
 .well-layers li::after {
-  content: ""; position: absolute; top: 50%; left: 100%; width: 26px; height: 1px;
+  content: ""; position: absolute; top: 50%; left: 100%; width: var(--stage-connector-length, 26px); height: 1px;
   background: var(--ember); opacity: 0.65;
-  transform: scaleX(var(--stage-reveal)); transform-origin: left;
+  transform: rotate(var(--stage-connector-angle, 0rad)) scaleX(var(--stage-reveal)); transform-origin: left;
 }
 .well-layers a {
   display: flex; flex-direction: column; justify-content: center;
@@ -108,11 +128,49 @@
 .well-layers a:hover, .well-layers a:focus-visible { background: var(--ink-3); outline: 1px solid var(--ember); outline-offset: 3px; }
 .well-layers a:hover strong { color: var(--ember); }
 
+.well-conductor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.4rem 0.65rem;
+  font-size: 0.68rem;
+  color: var(--water);
+  background: #0a1413ed;
+  border-left: 2px solid var(--water);
+  border-radius: 0 5px 5px 0;
+}
+.well-foundations {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 44px;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.4rem;
+  border-top: 1px solid var(--line);
+  padding-top: 0.6rem;
+}
+.well-foundations a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.3rem 0.4rem;
+  font-size: 0.62rem;
+  color: var(--bone-dim);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+.well-conductor:hover, .well-foundations a:hover { color: var(--ember); }
+
 .well-delivery {
   --delivery-progress: 0;
   --creation-settle: 0; --creation-glow: 0;
   position: absolute; z-index: 4;
-  top: var(--creation-y, 70px); left: var(--creation-x, 50%);
+  top: calc(var(--creation-y, 70px) + var(--well-model-top)); left: var(--creation-x, 50%);
   width: var(--creation-width, 240px); pointer-events: none;
   opacity: var(--delivery-progress);
   transform: translate(-50%, -50%) perspective(550px)
@@ -148,8 +206,6 @@
 .creation-window .creation-ready { fill: var(--water); opacity: var(--creation-verify); }
 .creation-sweep { opacity: calc(1 - var(--creation-sweep)); transform: translateX(calc(-58px + var(--creation-sweep) * 340px)); }
 
-.harness-list { display: flex; flex-wrap: wrap; gap: 0.7rem 1.7rem; margin-top: 3rem; padding-block: 1.25rem; border-block: 1px solid var(--line-soft); color: var(--bone-dim); font: 400 0.85rem/1.7 var(--font-mono); }
-html { scroll-padding-top: 84px; }
 
 @media (max-width: 900px) {
   .hero-well { max-width: 380px; order: 0; margin-top: 0; }
@@ -167,7 +223,7 @@ html { scroll-padding-top: 84px; }
   .well-hint > span:not(.sr-only) { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  #wellModel canvas, .well-fallback, #wellToggle { transition: none; }
+  #wellModel canvas, #wellToggle { transition: none; }
   .well-layers li { transform: translateY(-50%); }
   .well-delivery { transform: translate(-50%, -50%); filter: none; }
   .creation-piece { transform: none; }

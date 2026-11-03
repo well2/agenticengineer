@@ -1,0 +1,122 @@
+/* Services and the Cognera ecosystem share the site's existing materials. */
+.services, .faq-section { background: var(--ink-1); }
+.service-list { margin-top: 3rem; border-top: 1px solid var(--line); }
+.service-row {
+  display: grid;
+  grid-template-columns: 2rem minmax(10rem, 0.9fr) minmax(0, 1.6fr);
+  gap: 1.5rem;
+  padding-block: 2rem;
+  border-bottom: 1px solid var(--line);
+}
+.service-row h3 { font-size: clamp(1.5rem, 2.5vw, 2rem); line-height: 1.2; }
+.service-row p, .stage-row p, .foundation p, .suite-conductor p { color: var(--bone-dim); }
+.service-row .service-outcome { color: var(--water); font-size: 0.92rem; margin-top: 0.8rem; }
+.section-note { max-width: 75ch; margin-top: 1.7rem; color: var(--bone-dim); }
+.text-link, .footer-links a { text-decoration: underline; text-underline-offset: 0.25em; }
+.text-link { color: var(--ember); }
+.text-link:hover, .footer-links a:hover { color: var(--bone); }
+
+.suite-conductor {
+  display: grid;
+  grid-template-columns: minmax(10rem, 1fr) minmax(0, 2.3fr);
+  gap: 2rem;
+  margin-top: 3rem;
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--ember);
+  background: linear-gradient(110deg, #ff9e3a0a, transparent);
+}
+.suite-conductor h3 { font-size: clamp(2rem, 4vw, 3rem); color: var(--ember-soft); margin-top: 0.5rem; }
+.suite-conductor .suite-boundary { font-size: 0.9rem; color: var(--water); margin-top: 0.8rem; }
+.workflow-map {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-block: 1.5rem 2.5rem;
+  border-block: 1px solid var(--line);
+}
+.workflow-map li { min-width: 0; position: relative; }
+.workflow-map a { display: flex; flex-direction: column; gap: 0.5rem; padding: 1.2rem 0.9rem; height: 100%; }
+.workflow-map span { font-size: 0.7rem; color: var(--bone-dim); }
+.workflow-map strong { font-size: 1.2rem; color: var(--ember-soft); }
+.workflow-map li + li { border-left: 1px solid var(--line); }
+.workflow-map a:hover { background: #ff9e3a09; }
+.stage-row {
+  display: grid;
+  grid-template-columns: minmax(9rem, 1fr) minmax(0, 2fr) minmax(7rem, 0.65fr);
+  align-items: start;
+  gap: 2rem;
+  padding-block: 2rem;
+  border-bottom: 1px solid var(--line);
+}
+.stage-row h3 { color: var(--ember-soft); margin-top: 0.6rem; }
+.stage-row .tool-io { color: var(--ember); margin-bottom: 0.65rem; }
+.stage-row .stage-tags { font-size: 0.75rem; line-height: 1.8; color: var(--muted); }
+.foundations-title { margin-top: 3.5rem; }
+.foundation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  margin-top: 1.7rem;
+}
+.foundation { border-top: 2px solid var(--water); padding-top: 1.4rem; }
+.foundation h4 { font: 540 1.65rem/1.2 var(--font-display); color: var(--bone); margin: 0.8rem 0; }
+.foundation p { font-size: 0.97rem; }
+.foundation .tool-step { font-size: 0.72rem; }
+.faq-list { max-width: 58rem; margin-top: 2.5rem; border-top: 1px solid var(--line); }
+.faq-list details { border-bottom: 1px solid var(--line); }
+.faq-list summary { padding: 1.3rem 0.3rem; font-size: 1.15rem; font-weight: 500; cursor: pointer; }
+.faq-list summary::marker { color: var(--ember); }
+.faq-list details[open] summary { color: var(--ember); }
+.faq-list p { color: var(--bone-dim); padding: 0 1.5rem 1.5rem; max-width: 75ch; }
+.site-foot .footer-links { margin-top: 1rem; }
+.footer-links a { display: inline-flex; min-height: 44px; align-items: center; }
+
+/* Readable without JavaScript; targets remain comfortable on touch screens. */
+.site-head { background: var(--ink-0); }
+.brand, .nav a { min-height: 44px; min-width: 44px; }
+.nav { align-items: center; }
+.nav a { display: inline-flex; align-items: center; justify-content: center; }
+html { scroll-padding-top: 110px; }
+:focus-visible { outline: 2px solid var(--ember); outline-offset: 4px; }
+#main:focus { outline: none; }
+
+@media (max-width: 1000px) {
+  .wordmark { display: none; }
+  .stage-row { grid-template-columns: minmax(9rem, 1fr) minmax(0, 2fr); }
+  .stage-tags { grid-column: 2; }
+}
+@media (max-width: 700px) {
+  html { scroll-padding-top: 150px; }
+  .hero { padding-top: 10rem; }
+  .service-row { grid-template-columns: 1.5rem minmax(0, 1fr); gap: 1rem; }
+  .service-row > div { grid-column: 2; }
+  .suite-conductor { grid-template-columns: 1fr; gap: 1rem; }
+  .workflow-map { grid-template-columns: 1fr; }
+  .workflow-map a { flex-direction: row; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.8rem; }
+  .workflow-map li + li { border-left: 0; border-top: 1px solid var(--line); }
+  .stage-row { grid-template-columns: 1fr; gap: 1rem; }
+  .stage-tags { grid-column: auto; }
+  .foundation-grid { grid-template-columns: 1fr; }
+  .hero-title { font-size: clamp(2.7rem, 11vw, 5.4rem); }
+  .nav { gap: 0 0.6rem; }
+  .site-head { gap: 0.7rem; }
+}
+@media (max-width: 380px) {
+  .nav { font-size: 0.72rem; gap: 0 0.6rem; }
+  .site-head { padding-inline: 1rem; }
+}
+@media (forced-colors: active) {
+  .foundation, .suite-conductor, .service-row, .stage-row, .faq-list details { border-color: CanvasText; }
+  :focus-visible { outline-color: Highlight; }
+}
+@media print {
+  .site-head, .depth-rail, .grain, .hero-well, .skip { display: none; }
+  body, main > section, .site-foot { background: white; color: black; }
+  .hero-stats, .hero-stats li, .firm-card, .principles,
+  .principles > div, .suite-conductor, .btn { background: white; box-shadow: none; }
+  main > section { padding: 1.5rem 0; }
+  .hero { min-height: auto; }
+  .hero-inner { display: block; }
+  p, h1, h2, h3, h4, a, strong, span, em { color: black !important; }
+  article, details { break-inside: avoid; }
+}

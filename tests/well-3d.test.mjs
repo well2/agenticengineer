@@ -1,16 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { getWellLayout, sampleWellTransition } from '../js/well-layout.mjs';
+import { getWellLayout, sampleWellTransition, getCourseHeight, WELL_COURSES } from '../js/well-layout.mjs';
 
 test('exploding the sculpture separates courses and keeps the rope attached', () => {
     const assembled = getWellLayout(0);
     const exploded = getWellLayout(1);
-    assert.equal(exploded.courses.length, 4);
+    assert.equal(exploded.courses.length, 6);
     assert.equal(exploded.courses[0], assembled.courses[0]);
-    assert.ok(exploded.courses[3] > assembled.courses[3]);
+    assert.ok(exploded.courses.at(-1) > assembled.courses.at(-1));
     assert.ok(exploded.ropeLength > 0);
     assert.ok(Math.abs(exploded.ropeBottom + exploded.ropeLength - exploded.axle) < 1e-10);
-    assert.equal(exploded.winch, exploded.courses[3] + 0.34);
+    assert.equal(exploded.winch, exploded.courses.at(-1) + getCourseHeight(WELL_COURSES.count - 1) + WELL_COURSES.winchClearance);
 });
 
 test('layout clamps animation overshoot at both valid boundaries', () => {
@@ -27,9 +27,9 @@ test('invalid expansion is rejected before it can corrupt scene transforms', () 
 test('upper courses lift first and reverse composition retraces the same geometry', () => {
     const closed = getWellLayout(0);
     const opening = getWellLayout(0.12);
-    assert.ok(opening.courses[3] > closed.courses[3]);
+    assert.ok(opening.courses.at(-1) > closed.courses.at(-1));
     assert.equal(opening.courses[1], closed.courses[1]);
-    assert.ok(opening.twists[3] > 0);
+    assert.ok(opening.twists.at(-1) > 0);
     const reverse = sampleWellTransition(1, 0, 575);
     assert.deepEqual(getWellLayout(reverse.value), getWellLayout(0.5));
     assert.ok(getWellLayout(1).twists.every((angle) => Math.abs(angle) < 1e-10));

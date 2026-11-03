@@ -1,0 +1,52 @@
+/* A personal adoption timeline, with the current toolkit grouped by color. */
+.tool-history { margin-top: 4rem; }
+.tool-history h3 { margin-top: 0.6rem; font-size: clamp(1.7rem, 3vw, 2.2rem); }
+.history-intro { color: var(--bone-dim); max-width: 60ch; margin-top: 1rem; }
+.history-track { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); margin-top: 2rem; }
+.history-track li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 1.1rem 1rem 1.4rem 0;
+  border-top: 1px solid var(--bone-dim);
+}
+.history-track li::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--bone-dim);
+}
+.history-track li:last-child { border-image: linear-gradient(90deg, var(--water), transparent) 1; }
+.history-index { font-size: 0.72rem; color: var(--muted); }
+.history-track strong { font: 500 clamp(0.85rem, 1.25vw, 1.05rem)/1.4 var(--font-mono); color: var(--bone-dim); }
+.history-caption { font-size: 0.8rem; color: var(--muted); }
+.history-track .history-current { border-top-color: var(--water); background: linear-gradient(#8fd8d007, transparent); }
+.history-track .history-current::before { background: var(--water); }
+.history-current strong, .history-current .history-caption { color: var(--water); }
+
+@media (max-width: 800px) {
+  .history-track { grid-template-columns: 1fr; padding-left: 4px; }
+  .history-track li {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.3rem 0.8rem;
+    padding: 0.8rem 0 1.4rem 1.5rem;
+    border-top: 0;
+    border-left: 1px solid var(--bone-dim);
+  }
+  .history-track li::before { left: -4px; top: 1.3rem; }
+  .history-track strong { font-size: 1rem; }
+  .history-caption { grid-column: 2; }
+  .history-track .history-current { border-left-color: var(--water); background: linear-gradient(90deg, #8fd8d007, transparent); }
+  .history-track li:last-child { border-image: linear-gradient(var(--water), transparent) 1; }
+}
+@media print {
+  .history-track .history-current { background: white; border-color: black; }
+  .history-track li::before { background: black !important; }
+}

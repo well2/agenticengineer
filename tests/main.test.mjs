@@ -14,6 +14,8 @@ function createPage(options = {}) {
     scrollY: options.scrollY ?? 0,
     innerHeight: options.innerHeight ?? 1000,
     innerWidth: options.innerWidth ?? 1440,
+    scrollPaddingTop: options.scrollPaddingTop ?? "0px",
+    getComputedStyle: () => ({ scrollPaddingTop: window.scrollPaddingTop }),
     matchMedia: () => ({ get matches() { return window.innerWidth >= 1100; } }),
     addEventListener(name, handler) {
       const handlers = events.get(name) || [];
@@ -201,6 +203,33 @@ test("navigation tracking includes a taller mobile header", () => {
   assert.deepEqual(page.current(), []);
   page.scrollTo(870);
   assert.deepEqual(page.current(), ["#kovarna"]);
+});
+
+test("native anchor landing marks the section current at its CSS scroll offset", () => {
+  const page = createPage({ scrollPaddingTop: "150px", headerHeight: 65 });
+  page.scrollTo(850);
+  assert.deepEqual(page.current(), ["#kovarna"]);
+  assert.equal(page.elements.get("link-kovarna").getAttribute("aria-current"), "location");
+});
+
+test("responsive scroll padding refreshes and tolerates fractional anchor positions", () => {
+  const page = createPage({ scrollPaddingTop: "110px", sections: { kovarna: 1000.5 } });
+  page.scrollTo(850);
+  assert.deepEqual(page.current(), []);
+  page.window.scrollPaddingTop = "150px";
+  page.emit("resize");
+  page.flush();
+  assert.deepEqual(page.current(), ["#kovarna"]);
+});
+
+test("unresolved CSS scroll padding falls back to the measured header", () => {
+  for (const scrollPaddingTop of ["auto", "", "invalid"]) {
+    const page = createPage({ scrollPaddingTop, headerHeight: 100 });
+    page.scrollTo(850);
+    assert.deepEqual(page.current(), []);
+    page.scrollTo(870);
+    assert.deepEqual(page.current(), ["#kovarna"]);
+  }
 });
 
 test("broken or empty navigation targets are ignored without throwing", () => {

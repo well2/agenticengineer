@@ -21,8 +21,9 @@ function updateLayerVisibility(visible) {
 
 updateLayerVisibility(false);
 
-async function initialize() {
-    if (started || !mount || !figure) return;
+export async function initialize({ onReady = () => {}, onError = () => {} } = {}) {
+    if (started) return;
+    if (!mount || !figure) { onError(); return; }
     started = true;
     const canvas = document.createElement('canvas');
     let renderer;
@@ -37,6 +38,7 @@ async function initialize() {
     let active = true;
     let disposed = false;
     let hasSize = false;
+    let ready = false;
     const listeners = [];
 
     cleanup = () => {
@@ -66,9 +68,15 @@ async function initialize() {
         listeners.push(() => target.removeEventListener(event, handler, options));
     }
 
+    function fail() {
+        if (disposed) return;
+        cleanup();
+        onError();
+    }
+
     try {
         const context = canvas.getContext('webgl2', { alpha: true, antialias: true, powerPreference: 'low-power' });
-        if (!context) return;
+        if (!context) { fail(); return; }
         const [THREE, { createWellScene }, { createWellControls }, { createWellHoist }, { createBucketPourControl }, { createWellStages }] = await Promise.all([
             import('../vendor/three/three.module.min.js'),
             import('./well-scene.js'),
@@ -136,7 +144,7 @@ async function initialize() {
             try {
                 draw(time);
             } catch {
-                cleanup();
+                fail();
             }
         }
 
@@ -177,6 +185,7 @@ async function initialize() {
             updateToggle();
             updateStatus();
             if (toggle) toggle.hidden = false;
+            if (!ready) { ready = true; onReady(); }
             if (transition || controlsMoving || waterStep.animating) requestRender();
             else lastFrameTime = null;
         }
@@ -193,7 +202,7 @@ async function initialize() {
             try {
                 renderer.setSize(width, height, false);
             } catch {
-                cleanup();
+                fail();
                 return;
             }
             aspect = width / height;
@@ -215,8 +224,8 @@ async function initialize() {
             if (!status) return;
             const english = document.documentElement.lang === 'en';
             const messages = english
-                ? ['Empty bucket. Lower it to the water.', 'Filling the bucket…', 'Water collected. Raise the bucket.', 'Water is up. Click the bucket to create.', 'From experience to maintainable software…', 'Anvil, Forge and Temper — a foundation for long-term maintainability.']
-                : ['Prázdný kýbl. Spusť ho k vodě.', 'Kýbl nabírá vodu…', 'Voda je v kýblu. Vytáhni ho nahoru.', 'Voda je nahoře. Klikni na kýbl a tvoř.', 'Ze zkušeností vzniká udržovatelný software…', 'Anvil, Forge a Temper — opora pro dlouhodobou udržovatelnost.'];
+                ? ['Empty bucket. Lower it to the water.', 'Filling the bucket…', 'Water collected. Raise the bucket.', 'Water is up. Click the bucket to create.', 'From experience to maintainable software…', 'From research to deployment — the connected Cognera workshop.']
+                : ['Prázdný kýbl. Spusť ho k vodě.', 'Kýbl nabírá vodu…', 'Voda je v kýblu. Vytáhni ho nahoru.', 'Voda je nahoře. Klikni na kýbl a tvoř.', 'Ze zkušeností vzniká udržovatelný software…', 'Od výzkumu po nasazení — propojená kovárna Cognera.'];
             const index = water.pourProgress !== null ? 4
                 : hasDelivery ? 5 : bucketLift <= 0.015 && water.fill < 1 ? 1
                     : water.fill > 0 ? (bucketLift >= 0.97 ? 3 : 2) : 0;
@@ -271,21 +280,7 @@ async function initialize() {
         updateToggle();
         resize();
     } catch {
-        cleanup();
-    }
-}
-
-if (mount && !navigator.connection?.saveData) {
-    if ('IntersectionObserver' in window) {
-        const viewportObserver = new IntersectionObserver((entries) => {
-            if (entries.some((entry) => entry.isIntersecting)) {
-                viewportObserver.disconnect();
-                initialize();
-            }
-        }, { rootMargin: '120px' });
-        viewportObserver.observe(mount);
-    } else {
-        initialize();
+        fail();
     }
 }
 

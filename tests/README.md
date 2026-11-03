@@ -3,12 +3,13 @@
 Run the interaction tests with Node.js; no installation step is needed:
 
 ```sh
+node tools/sync-assets.mjs --check
 node --test tests/*.test.mjs
 ```
 
 The suite executes the shipped browser script in a small isolated DOM fixture. It
 checks navigation, accessible current-section state, header condensation, locale
-formatting, scroll bounds, missing elements, responsive rail updates, and shared
+formatting, scroll bounds, missing elements, responsive rail updates, CSS anchor offsets, and shared
 animation-frame scheduling. Browser layout and appearance still require a visual
 check on desktop and mobile.
 
@@ -29,7 +30,9 @@ checks run the complete lower/fill/raise/pour cycle and verify that animation st
 Bucket click tests distinguish taps from drags and avoid duplicate native clicks.
 
 Stage tests cover continuous staggered reveal, reversed movement, projection onto
-the real course gaps, minimum spacing, reduced motion, and keyboard focus handoff.
+all five real course gaps, angled connector endpoints, minimum spacing, reduced
+motion, and keyboard focus handoff. Course geometry tests verify stone clearance
+throughout opening and reversal while preserving the original camera envelope.
 Pour effects tests check the curved stream's endpoints and opening clearance,
 moving droplets, settling ripples, valid normals, and reuse of geometry buffers.
 Delivery checks cover staggered SVG assembly, the verification sweep, accessibility
@@ -55,3 +58,9 @@ fixed anchor destinations and a header/depth display, so a shared native
 `requestAnimationFrame` callback keeps the existing static-site architecture and
 does not add a dependency or build step. The section-position calculation is
 specific to the fixed header and short final contact section.
+
+The model launcher is tested separately for automatic startup after the first
+paint, duplicate events, loading/error announcements, preserved keyboard focus,
+Data Saver, and navigation or bfcache transitions during loading. Asset-version
+checks cover deterministic hashing, complete import maps, both locales, and stale
+or malformed generated metadata.

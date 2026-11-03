@@ -20,7 +20,10 @@
     const scrollY = Math.max(0, window.scrollY);
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     const progress = maxScroll > 0 ? Math.min(scrollY / maxScroll, 1) : 0;
-    const activationLine = (head?.getBoundingClientRect().height || 0) + 40;
+    const headerLine = (head?.getBoundingClientRect().height || 0) + 40;
+    const scrollPadding = Number.parseFloat(window.getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    // Native anchor scrolling stops at the CSS offset, including wrapped headers.
+    const activationLine = Math.max(headerLine, scrollPadding) + 1;
     let currentLink = null;
     let latestTop = -Infinity;
     let lastLink = null;
