@@ -35,7 +35,7 @@ Smithy coordinates the workflow; specialist applications own their work.
 - Cognera Supervisor: shared supervision and controlled recovery within application permissions.
 - CogneraSpec: traceability between specifications, tasks and verification evidence.
 
-This is an evolving development environment. Project deployment and autonomy depend on permissions and verified capabilities. The site does not claim guaranteed cost savings, universal correctness or fully autonomous production operation. Internal implementation details are not part of this public overview.
+The workshop is still evolving. Deployment and autonomy depend on permissions and verified capabilities; the site makes no claims about cost savings or fully autonomous production operation, and it does not describe internal implementation.
 
 ## Public identity
 
@@ -44,4 +44,4 @@ This is an evolving development environment. Project deployment and autonomy dep
 - [Cognera](https://cognera.cz/)
 - [nopShop Solutions](https://www.nopshop.cz/)
 
-Content reviewed: 2026-11-03. The Czech and English HTML pages are the primary public descriptions. This optional text index summarizes the same visible content; it is not a separate product specification.
+Content reviewed 2026-11-03. The Czech and English pages are the primary source; this file summarizes them.

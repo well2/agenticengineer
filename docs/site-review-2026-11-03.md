@@ -27,7 +27,7 @@ assign product release dates; 2023 marks the beginning of the author's AI work.
 The interactive well now presents five stages: Bellows → Anvil → Forge → Temper
 → Rivet. Six stone courses provide five real gaps, with projected connectors
 that remain attached to their gaps when labels need additional spacing. Smithy
-has a separate coordination link above the model; Harness, Supervisors, and
+has a separate coordination link above the model; Harness, Supervisor, and
 CogneraSpec have foundation links below it. The final illustrated application
 also includes all six applications. Both locales contain the same structure.
 

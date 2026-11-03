@@ -1,4 +1,4 @@
-/* ── Components: hero copy, buttons, timeline, cards, marquee ───────── */
+/* ── Components: hero copy, buttons, timeline, cards ───────── */
 
 .hero-eyebrow {
   font-size: 0.92rem;
@@ -179,89 +179,7 @@
   padding-left: clamp(1.2rem, 3vw, 2rem);
 }
 
-/* harness marquee — full-bleed across the viewport */
-.marquee {
-  position: relative;
-  margin-top: 4rem;
-  overflow: hidden;
-  border-block: 1px solid var(--line-soft);
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-
-.marquee-track {
-  display: inline-flex;
-  white-space: nowrap;
-  padding: 1.05rem 0;
-  font-size: 0.88rem;
-  color: var(--bone-dim);
-  animation: marquee 36s linear infinite;
-}
-
-/* spacing lives on ::after, not flex gap — the duplicated half stays exact, so the loop is seamless */
-.marquee-track span::after {
-  content: "▸";
-  margin-inline: 3.2rem;
-  color: var(--ember);
-  opacity: 0.6;
-}
-
-.marquee:hover .marquee-track,
-.marquee:focus-within .marquee-track,
-.marquee.paused .marquee-track {
-  animation-play-state: paused;
-}
-
-.marquee-toggle {
-  position: absolute;
-  right: clamp(1rem, 4vw, 3rem);
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  background: var(--ink-1);
-  color: var(--muted);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  font-size: 0.7rem;
-  padding: 0.3rem 0.85rem;
-  cursor: pointer;
-  transition: color 0.2s, border-color 0.2s;
-}
-
-.marquee-toggle:hover {
-  color: var(--bone);
-  border-color: var(--ember);
-}
-
-/* tool cards */
-.tool-card {
-  background: var(--ink-3);
-  border: 1px solid var(--line-soft);
-  border-radius: 8px;
-  padding: clamp(1.4rem, 2.5vw, 2rem);
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
-}
-
-.tool-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 158, 58, 0.4);
-  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.45);
-}
-
-.tool-card p {
-  color: var(--bone-dim);
-  font-size: 0.97rem;
-}
-
-.tool-card h3 { color: var(--ember-soft); }
-
-.t-major { border-top: 2px solid var(--ember); }
-
+/* stage labels */
 .tool-step {
   font-size: 0.78rem;
   color: var(--muted);
@@ -272,28 +190,6 @@
 .tool-io {
   font-size: 0.85rem;
   color: var(--ember);
-}
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-top: auto;
-  padding-top: 0.5rem;
-}
-
-.chips li {
-  font-size: 0.74rem;
-  color: var(--bone-dim);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 0.22rem 0.7rem;
-}
-
-.tool-more {
-  margin-top: 1.8rem;
-  font-size: 0.85rem;
-  color: var(--muted);
 }
 
 /* principles */
@@ -361,24 +257,4 @@
   margin-top: 0.6rem;
   font-size: 0.85rem;
   color: var(--ember);
-}
-
-/* embers from the forge */
-.embers {
-  position: absolute;
-  inset: -12% -8%;
-  pointer-events: none;
-}
-
-.embers i {
-  position: absolute;
-  bottom: 0;
-  width: var(--s, 4px);
-  height: var(--s, 4px);
-  border-radius: 50%;
-  background: var(--ember);
-  opacity: 0;
-  filter: blur(0.5px);
-  box-shadow: 0 0 8px rgba(255, 158, 58, 0.8);
-  animation: ember-rise var(--t, 7s) linear var(--dl, 0s) infinite;
 }
