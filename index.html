@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="/css/fonts.css?v=2d51ff3495d9">
   <link rel="stylesheet" href="/css/tokens.css?v=286576c4bb3a">
   <link rel="stylesheet" href="/css/layout.css?v=a4c1169c3a7c">
-  <link rel="stylesheet" href="/css/components.css?v=68bcbe88e0f6">
+  <link rel="stylesheet" href="/css/components.css?v=581962bf11d1">
   <link rel="stylesheet" href="/css/motion.css?v=a92a85dd7c3a">
   <link rel="stylesheet" href="/css/well-3d.css?v=e03021e3c73d">
   <link rel="stylesheet" href="/css/ecosystem.css?v=51e886b035b4">
@@ -49,7 +49,6 @@
   <script type="importmap" id="asset-importmap">
   {
     "imports": {
-      "/js/consent.js": "/js/consent.js?v=598e3318b6bf",
       "/js/main.js": "/js/main.js?v=f3999a9994c2",
       "/js/well-3d.js": "/js/well-3d.js?v=1ba3446ce01b",
       "/js/well-bucket-control.js": "/js/well-bucket-control.js?v=c008618ded49",
@@ -399,25 +398,15 @@
     </section>
   </main>
 
-  <section class="consent" id="consent" aria-labelledby="consentTitle" hidden>
-    <p class="consent-title mono" id="consentTitle">Smím vidět, kam klikáte?</p>
-    <p class="consent-text">Microsoft Clarity mi s&nbsp;analytickými cookies ukáže, co na webu funguje. Obsah stránky zůstává maskovaný. <a href="https://www.microsoft.com/cs-cz/privacy/privacystatement" rel="noopener">Podrobnosti</a></p>
-    <div class="consent-actions">
-      <button class="btn btn-ghost" type="button" data-consent="denied">Ne, díky</button>
-      <button class="btn btn-ghost" type="button" data-consent="granted">Jasně</button>
-    </div>
-  </section>
-
   <footer class="site-foot">
     <svg class="mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M10 24 L32 9 L54 24"/><path d="M16 24 V42 M48 24 V42"/><path d="M16 31 H48"/><rect x="25" y="26.5" width="14" height="9" rx="4.5"/><path d="M48 31 H54 V38 H59"/><path d="M32 35.5 V47"/><rect x="13" y="42" width="38" height="15" rx="3"/><path d="M13 49.5 H51 M25 42 V49.5 M39 42 V49.5 M32 49.5 V57"/>
     </svg>
     <p class="mono">© <span id="year">2026</span> Jiří Studnička · agenticengineer.cz</p>
     <p class="mono foot-note">Postaveno s AI. Promyšleno člověkem.</p>
-    <p class="footer-links"><a href="/llms.txt">Stručný přehled pro AI asistenty</a> · <a href="#otazky">FAQ</a> · <span>Aktualizováno <time datetime="2026-11-26">26.&nbsp;11.&nbsp;2026</time></span><span class="consent-open-wrap"> · <button class="consent-open" type="button" data-consent-open hidden>Nastavení měření</button></span></p>
+    <p class="footer-links"><a href="/llms.txt">Stručný přehled pro AI asistenty</a> · <a href="#otazky">FAQ</a> · <span>Aktualizováno <time datetime="2026-11-26">26.&nbsp;11.&nbsp;2026</time></span></p>
   </footer>
 
-  <script src="/js/consent.js?v=598e3318b6bf" defer></script>
   <script src="/js/main.js?v=f3999a9994c2" defer></script>
   <script type="module" src="/js/well-start.js?v=7cd5c0b434d9"></script>
   <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "9b236464fa014e0282c1070d099108cd"}'></script>
