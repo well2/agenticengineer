@@ -25,7 +25,9 @@ export function createWellStages(THREE, model, camera, mount, list) {
         if (!interactive && item.contains(mount.ownerDocument.activeElement)) mount.focus({ preventScroll: true });
         item.hidden = reveal === 0;
         item.inert = !interactive;
-        item.setAttribute('aria-hidden', String(!interactive));
+        // Unchanged attributes are left alone so an animation does not churn the accessibility tree.
+        const hiddenFromAssistiveTechnology = String(!interactive);
+        if (item.getAttribute('aria-hidden') !== hiddenFromAssistiveTechnology) item.setAttribute('aria-hidden', hiddenFromAssistiveTechnology);
         item.style.setProperty('--stage-reveal', String(reveal));
     }
 

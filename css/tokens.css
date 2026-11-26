@@ -1,6 +1,9 @@
 /* ── Design tokens, reset, typography base ─────────────────────────── */
 
 :root {
+  /* The site is dark only; this also darkens scrollbars and other browser UI. */
+  color-scheme: dark;
+
   /* well depth — warm blacks and sediment strata */
   --ink-0: #0c0a07;
   --ink-1: #110e0a;

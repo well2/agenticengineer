@@ -170,10 +170,7 @@ export async function createPage(options = {}) {
 
 export function assertCleanedUp(page) {
     assert.deepEqual([page.ready(), page.expanded(), page.canvas.attached], [false, false, false]);
-    if (page.layers) {
-        assert.equal(page.layers.hidden, true);
-        assert.equal(page.toggle.getAttribute('aria-expanded'), 'false');
-    }
+    if (page.layers) assert.equal(page.layers.hidden, true);
     assert.deepEqual([page.toggle.hidden, page.delivery.hidden, page.stages.hidden], [true, true, true]);
     assert.deepEqual([page.listenerCount(), page.frames.size, page.stats.callsAfterDispose], [0, 0, 0]);
     assert.ok(page.observers.every((observer) => observer.disconnected));

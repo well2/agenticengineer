@@ -129,11 +129,8 @@
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--line);
-  transition: background 0.3s, box-shadow 0.3s;
+  background: var(--bone-dim);
 }
-
-.timeline li.in::before { background: var(--bone-dim); }
 
 .timeline .tl-year {
   font-size: 0.88rem;

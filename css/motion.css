@@ -1,7 +1,24 @@
 /* A single entrance; the page remains visible if scripts fail. */
 .hero-inner { animation: arrive 700ms ease-out both; }
 @keyframes arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-.btn, .text-link, .nav a, .firm-card, .contact-email { transition: color 160ms, background-color 160ms, border-color 160ms; }
+.btn, .text-link, .nav a, .firm-card { transition: color 160ms, background-color 160ms, border-color 160ms; }
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  /* Switching between the Czech and English page cross-fades instead of flashing. */
+  @view-transition { navigation: auto; }
+
+  /* Rows and cards rise into place as they scroll in. Purely decorative: without
+     scroll-driven animations the content is simply there. */
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes rise { from { opacity: 0; translate: 0 18px; } }
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      /* Fixed distances keep tall blocks from staying half-transparent while being read. */
+      animation-range: cover 30px cover 220px;
+    }
+  }
+}
 @media (max-width: 900px) {
   .grain { display: none; }
 }

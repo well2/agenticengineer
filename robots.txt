@@ -1,4 +1,34 @@
+# agenticengineer.cz — everything on this site is public and may be crawled.
+# Search engines, AI search, assistants fetching a page for a user and AI training
+# crawlers are all welcome. The named groups only make that policy explicit; to
+# opt out of training, change the last group to "Disallow: /".
+
 User-agent: *
+Allow: /
+
+# Search engines
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: SeznamBot
+User-agent: Applebot
+User-agent: DuckDuckBot
+Allow: /
+
+# AI search and retrieval on behalf of a user
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+
+# AI model training
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://agenticengineer.cz/sitemap.xml

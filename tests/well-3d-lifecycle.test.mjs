@@ -141,13 +141,13 @@ test('layer links appear after successful expansion and hide immediately on coll
     page.flush();
     assert.equal(page.layers.hidden, false);
     assert.equal(page.expanded(), true);
-    assert.equal(page.toggle.getAttribute('aria-expanded'), 'true');
+    // The button moves the bucket; it must not announce itself as a disclosure.
+    assert.equal(page.toggle.getAttribute('aria-expanded'), undefined);
     assert.equal(page.frames.size, 0);
     page.toggle.emit('click');
     page.flush();
     assert.equal(page.layers.hidden, true);
     assert.equal(page.expanded(), false);
-    assert.equal(page.toggle.getAttribute('aria-expanded'), 'false');
     page.flush();
     assert.equal(page.frames.size, 0);
     page.window.emit('pagehide', { persisted: false });

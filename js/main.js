@@ -12,7 +12,11 @@
   const destinations = links
     .map((link) => ({ link, section: document.getElementById(link.hash.slice(1)) }))
     .filter(({ section }) => section && section.id !== "top");
+  const depthMarks = [...document.querySelectorAll("[data-depth]")]
+    .map((mark) => ({ mark, section: mark.closest("section") }))
+    .filter(({ section }) => section);
   let framePending = false;
+  let layoutChanged = true;
 
   function updatePage() {
     framePending = false;
@@ -58,6 +62,16 @@
       if (readout) readout.textContent = `−${isCzech ? depth.replace(".", ",") : depth} m`;
       if (bucket) bucket.style.transform = `translate(-50%, ${progress * window.innerHeight * 0.84}px)`;
     }
+
+    if (layoutChanged && maxScroll > 0) {
+      layoutChanged = false;
+      // Each section mark shows the gauge reading at which that section reaches the header.
+      for (const { mark, section } of depthMarks) {
+        const offset = section.getBoundingClientRect().top + window.scrollY - activationLine;
+        const depth = String(Math.round(Math.min(Math.max(offset / maxScroll, 0), 1) * 42));
+        if (mark.textContent !== depth) mark.textContent = depth;
+      }
+    }
   }
 
   function scheduleUpdate() {
@@ -66,11 +80,16 @@
     window.requestAnimationFrame(updatePage);
   }
 
+  function scheduleLayoutUpdate() {
+    layoutChanged = true;
+    scheduleUpdate();
+  }
+
   window.addEventListener("scroll", scheduleUpdate, { passive: true });
-  window.addEventListener("resize", scheduleUpdate, { passive: true });
-  window.addEventListener("load", scheduleUpdate);
-  window.addEventListener("pageshow", scheduleUpdate);
-  if (document.fonts) document.fonts.ready.then(scheduleUpdate);
+  window.addEventListener("resize", scheduleLayoutUpdate, { passive: true });
+  window.addEventListener("load", scheduleLayoutUpdate);
+  window.addEventListener("pageshow", scheduleLayoutUpdate);
+  if (document.fonts) document.fonts.ready.then(scheduleLayoutUpdate);
   if (year) year.textContent = String(new Date().getFullYear());
   updatePage();
 })();

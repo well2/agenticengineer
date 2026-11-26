@@ -4,7 +4,8 @@ import test from 'node:test';
 import { runInNewContext } from 'node:vm';
 
 const source = readFileSync(new URL('../js/well-start.js', import.meta.url), 'utf8')
-    .replace(/import\(['"]\.\/well-3d\.js(?:\?[^'"]*)?['"]\)/, 'loadModel()');
+    .replace(/import\(['"]\.\/well-3d\.js(?:\?[^'"]*)?['"]\)/, 'loadModel()')
+    .replaceAll('import.meta.resolve', 'resolveModule');
 
 function eventTarget() {
     const handlers = new Map();
@@ -19,11 +20,16 @@ function createPage(options = {}) {
     const frames = new Map();
     const status = { textContent: '' };
     const stats = { imports: 0, initializations: 0, focusCalls: 0 };
+    const classes = new Set();
+    const figure = { classList: { add: (name) => classes.add(name) } };
     const mount = {
         focus() { stats.focusCalls++; },
         setAttribute: (name, value) => attributes.set(name, value),
+        closest: (selector) => (selector === '.hero-well' && !options.noFigure ? figure : null),
     };
     const window = eventTarget();
+    if (options.webgl2) window.WebGL2RenderingContext = class {};
+    const preloads = [];
     let callbacks;
     let nextFrame = 1;
     let resolveModule, rejectModule;
@@ -35,6 +41,12 @@ function createPage(options = {}) {
                 wellModel: options.noMount ? null : mount,
                 wellLoadStatus: options.noStatus ? null : status,
             })[id] ?? null,
+            createElement: (name) => ({ name }),
+            head: { append: (link) => preloads.push(link) },
+        },
+        resolveModule(specifier) {
+            if (options.resolveThrows) throw new Error('Unresolvable');
+            return `https://example.test${specifier.replace('..', '')}?v=mapped`;
         },
         navigator: { connection: { saveData: options.saveData ?? false } },
         window,
@@ -48,6 +60,8 @@ function createPage(options = {}) {
     });
     return {
         status, stats, attributes, window, frames,
+        isStatic: () => classes.has('is-static'),
+        preloads,
         async paint() {
             const batch = [...frames.values()];
             frames.clear();
@@ -85,6 +99,7 @@ test('3D loads automatically after the first paint and never takes keyboard focu
     page.draw();
     assert.equal(page.attributes.get('aria-busy'), 'false');
     assert.equal(page.status.textContent, '');
+    assert.equal(page.isStatic(), false);
     assert.equal(page.stats.focusCalls, 0);
     page.draw();
     assert.equal(page.stats.focusCalls, 0);
@@ -111,7 +126,7 @@ test('failed imports announce a localized text alternative without mentioning an
         const loading = page.startLoading();
         page.failImport();
         await loading;
-        assert.match(page.status.textContent, lang === 'cs' ? /Kovárnu si můžete prohlédnout níže/ : /explore the workshop below/);
+        assert.match(page.status.textContent, lang === 'cs' ? /Forge si můžete prohlédnout níže/ : /explore Forge below/);
         assert.equal(page.attributes.get('aria-busy'), 'false');
         assert.equal(page.stats.focusCalls, 0);
         assert.equal(page.stats.initializations, 0);
@@ -123,8 +138,10 @@ test('a model failure before its first frame clears busy state and announces the
     const loading = page.startLoading();
     page.resolveImport();
     await loading;
+    assert.equal(page.isStatic(), false);
     page.failModel();
     assert.match(page.status.textContent, /could not load/);
+    assert.equal(page.isStatic(), true);
     assert.equal(page.attributes.get('aria-busy'), 'false');
     assert.equal(page.stats.focusCalls, 0);
 });
@@ -146,6 +163,7 @@ test('Data Saver suppresses heavy downloads and supplies a localized textual exp
         assert.equal(page.frames.size, 0);
         assert.equal(page.stats.imports, 0);
         assert.match(page.status.textContent, lang === 'cs' ? /úspora dat/ : /Data Saver/);
+        assert.equal(page.isStatic(), true);
     }
 });
 
@@ -204,4 +222,31 @@ test('an imported module waits for bfcache restoration before initialization', a
     assert.equal(page.stats.initializations, 1);
     page.draw();
     assert.equal(page.stats.focusCalls, 0);
+});
+
+test('starting the model preloads both Three.js modules through the import map, once', async () => {
+    const page = createPage({ webgl2: true });
+    assert.equal(page.preloads.length, 0);
+    const loading = page.startLoading();
+    assert.deepEqual(page.preloads.map((link) => [link.name, link.rel, link.href]), [
+        ['link', 'modulepreload', 'https://example.test/vendor/three/three.module.min.js?v=mapped'],
+        ['link', 'modulepreload', 'https://example.test/vendor/three/three.core.min.js?v=mapped'],
+    ]);
+    page.window.emit('pageshow');
+    page.resolveImport();
+    await loading;
+    assert.equal(page.preloads.length, 2);
+});
+
+test('without WebGL 2 nothing is preloaded, and a preload failure never blocks the model', async () => {
+    const unsupported = createPage();
+    const pending = unsupported.startLoading();
+    assert.equal(unsupported.preloads.length, 0);
+    unsupported.resolveImport();
+    await pending;
+    const page = createPage({ webgl2: true, resolveThrows: true });
+    const loading = page.startLoading();
+    page.resolveImport();
+    await loading;
+    assert.deepEqual([page.preloads.length, page.stats.imports, page.stats.initializations], [0, 1, 1]);
 });

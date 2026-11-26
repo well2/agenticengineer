@@ -12,10 +12,7 @@ let cleanup = () => {};
 let started = false;
 
 function updateLayerVisibility(visible) {
-    if (layers) {
-        layers.hidden = !visible;
-        toggle?.setAttribute('aria-expanded', String(visible));
-    }
+    if (layers && layers.hidden === visible) layers.hidden = !visible;
     figure?.classList[visible ? 'add' : 'remove']('is-expanded');
 }
 
@@ -213,9 +210,11 @@ export async function initialize({ onReady = () => {}, onError = () => {} } = {}
             if (!toggle) return;
             const english = document.documentElement.lang === 'en';
             const lower = bucketLift > 0.5;
-            toggle.textContent = lower
+            const label = lower
                 ? (english ? 'Lower the bucket' : 'Spustit kýbl')
                 : (english ? 'Raise the bucket' : 'Vytáhnout kýbl');
+            // Rewriting unchanged text on every frame would churn the accessibility tree.
+            if (toggle.textContent !== label) toggle.textContent = label;
             toggle.dataset.direction = lower ? 'down' : 'up';
             toggle.disabled = water.pourProgress !== null;
         }
@@ -224,8 +223,8 @@ export async function initialize({ onReady = () => {}, onError = () => {} } = {}
             if (!status) return;
             const english = document.documentElement.lang === 'en';
             const messages = english
-                ? ['Empty bucket. Lower it to the water.', 'Filling the bucket…', 'Water collected. Raise the bucket.', 'Water is up. Click the bucket to create.', 'From experience to maintainable software…', 'From research to deployment — the connected Cognera workshop.']
-                : ['Prázdný kýbl. Spusť ho k vodě.', 'Kýbl nabírá vodu…', 'Voda je v kýblu. Vytáhni ho nahoru.', 'Voda je nahoře. Klikni na kýbl a tvoř.', 'Ze zkušeností vzniká udržovatelný software…', 'Od výzkumu po nasazení — propojená kovárna Cognera.'];
+                ? ['Empty bucket. Lower it to the water.', 'Filling the bucket…', 'Water collected. Raise the bucket.', 'Water is up. Click the bucket to create.', 'From experience to maintainable software…', 'From research to deployment: Forge and its four modules.']
+                : ['Prázdný kýbl. Spusť ho k vodě.', 'Kýbl nabírá vodu…', 'Voda je v kýblu. Vytáhni ho nahoru.', 'Voda je nahoře. Klikni na kýbl a tvoř.', 'Ze zkušeností vzniká udržovatelný software…', 'Od výzkumu po nasazení: Forge a jeho čtyři moduly.'];
             const index = water.pourProgress !== null ? 4
                 : hasDelivery ? 5 : bucketLift <= 0.015 && water.fill < 1 ? 1
                     : water.fill > 0 ? (bucketLift >= 0.97 ? 3 : 2) : 0;

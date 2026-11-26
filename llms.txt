@@ -1,47 +1,55 @@
 # Jiří Studnička — Agentic Engineer
 
-> Personal website of Jiří Studnička. He designs AI agents, multi-agent systems and software development automation. Production software experience since 2004; agentic systems since 2023. Co-owner of Cognera and nopShop Solutions.
+> Personal website of Jiří Studnička, agentic engineer. He designs AI agents and multi-agent systems and automates software delivery from requirements to deployment. Production software since 2004, agentic systems since 2023. Lead author of Forge. Co-owner of Cognera and nopShop Solutions.
 
-## Primary pages
+## Pages
 
-- [Český profil a spolupráce](https://agenticengineer.cz/): Agentní systémy, automatizace vývoje softwaru, AI integrace a ověřování.
-- [English profile and services](https://agenticengineer.cz/en/): Agentic system design, software development automation, AI integration and verification.
-- [Cognera ecosystem](https://agenticengineer.cz/en/#kovarna): Roles of the six applications and three shared foundations.
-- [Practical questions](https://agenticengineer.cz/en/#otazky): Scope, ways to collaborate, quality and autonomy.
-- [Contact](https://agenticengineer.cz/en/#dno): Discuss a project via info@cognera.cz or LinkedIn.
+- [Czech page](https://agenticengineer.cz/): Profile, services, Forge, career, companies, FAQ and contact. Czech is the primary language.
+- [English page](https://agenticengineer.cz/en/): The same content in English.
 
-## What Jiří works on
+## Services
 
-- Agent roles, context, tool integration, permissions, handoffs and supervision.
-- Requirements, implementation, code review, tests, CI/CD and deployment.
-- Connecting repositories, APIs and business tools, including Model Context Protocol (MCP).
-- Browser and API acceptance, accessibility checks and traceable verification evidence.
+- Agentic and multi-agent system design: agent roles, context, tools, permissions, handoffs and supervision.
+- Software development automation: requirements, implementation, code review, tests, CI/CD and deployment.
+- AI integration and verification: connecting agents to repositories, APIs and business tools, including Model Context Protocol (MCP); browser and API acceptance with traceable evidence.
 
-## Personal tool progression
+Collaboration usually starts with a review of one process and a pilot with a clear scope.
 
-After starting with AI in 2023, Jiří progressively adopted Cline, Roo Code, Augment Code, Claude Code, Codex and OpenCode, in that order. Claude Code, Codex and OpenCode are the current stage of his toolkit. This is a personal adoption sequence, not a list of release dates.
+## Forge
 
-## The Cognera workshop
+Forge is one application for agentic software development. Its core takes a GitHub issue to a verified pull request: specification, implementation by an AI coding agent in a separate working tree, code review, tests, the pull request, and follow-up on review comments, CI failures and merge conflicts. Independent jobs run in parallel, dependent ones in sequence, and larger deliveries run as missions across repositories. Where a person should decide, the job stops and waits. Forge is operated from the web, the terminal and Telegram.
 
-Smithy coordinates the workflow; specialist applications own their work.
+Four optional modules run inside Forge. Each can be switched on or off individually, or left out of a delivery, and each keeps its own approvals and evidence:
 
-- Smithy: coordination, project context, open questions and stage results.
-- Bellows: opportunity research and source-backed proposals.
-- Anvil: code-aware requirements analysis and implementation readiness.
-- Forge: AI-assisted implementation, review, tests and CI fixes, including work across repositories.
-- Temper: independent browser and API verification, with visual and accessibility checks as applicable.
-- Rivet: deployment planning, required approvals, runtime verification and infrastructure visibility.
-- Cognera Harness: shared tool, model and reasoning-effort selection under task requirements and policies; execution remains with the application.
-- Cognera Supervisor: shared supervision and controlled recovery within application permissions.
-- CogneraSpec: traceability between specifications, tasks and verification evidence.
+- Bellows (research): checks an idea against public sources, verifies that cited quotations exist, and proposes opportunities with evidence and counter-arguments for a person to decide on.
+- Anvil (requirements): tests a requirement against the real code, helps complete the brief and prepares larger deliveries as missions.
+- Temper (verification): verifies a change on the running application through the browser and APIs and keeps the steps and evidence.
+- Rivet (deployment and operation): plans deployments under environment rules and approvals, verifies the outcome, keeps history and rollback, and covers servers, incidents and monitoring.
 
-The workshop is still evolving. Deployment and autonomy depend on permissions and verified capabilities; the site makes no claims about cost savings or fully autonomous production operation, and it does not describe internal implementation.
+Shared by the core and the modules:
 
-## Public identity
+- Cognera Harness: chooses the AI tool, model and reasoning level for each step, within rules.
+- Supervisor: one independent process that watches Forge and its modules and hands decisions to a person.
+- CogneraSpec: keeps specifications, tasks and verification evidence connected.
 
+Until November 2026 these were six separate applications: Smithy, Bellows, Anvil, Forge, Temper and Rivet. They have been merged into Forge. Coordination, which Smithy used to provide, now belongs to Forge and its Supervisor. Descriptions of a "Cognera workshop" of six applications are out of date.
+
+Forge is still evolving. Deployment and the level of autonomy depend on the project, permissions and verified capabilities. The site makes no claims about cost savings or fully autonomous production operation, and it does not describe internal implementation.
+
+## Contact
+
+- Email: info@cognera.cz
 - [LinkedIn](https://www.linkedin.com/in/jiristudnicka/)
 - [GitHub](https://github.com/well2)
-- [Cognera](https://cognera.cz/)
-- [nopShop Solutions](https://www.nopshop.cz/)
 
-Content reviewed 2026-11-03. The Czech and English pages are the primary source; this file summarizes them.
+## Companies
+
+- [Cognera](https://cognera.cz/): Agentic software house, co-owned by Jiří.
+- [nopShop Solutions](https://www.nopshop.cz/): nopCommerce e-commerce specialists, co-owned by Jiří.
+
+## Optional
+
+- Personal tool progression since 2023: Cline, Roo Code, Augment Code, then Claude Code, Codex and OpenCode, which form the current toolkit. This is an adoption order, not a list of release dates.
+- Career before 2023: .NET, Scala and Akka, big data with Spark and Kafka, and Java, for banks, insurers and energy companies, including Leveris, E.ON SolarCloud, Home Credit, Generali and SOFTINO.
+
+Content reviewed 2026-11-26. The Czech and English pages are the primary source; this file summarizes them.

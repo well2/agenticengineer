@@ -10,7 +10,7 @@ node --test tests/*.test.mjs
 The suite executes the shipped browser script in a small isolated DOM fixture. It
 checks navigation, accessible current-section state, header condensation, locale
 formatting, scroll bounds, missing elements, responsive rail updates, CSS anchor offsets, and shared
-animation-frame scheduling. Browser layout and appearance still require a visual
+animation-frame scheduling. Section depth marks are covered by three tests: the marks match the gauge reading at which each section reaches the header, they are measured again after layout changes but not while scrolling, and a page that cannot scroll keeps the authored numbers. Browser layout and appearance still require a visual
 check on desktop and mobile.
 
 The well suites cover the finite 1150ms staggered animation, interrupted reversal,
@@ -27,7 +27,7 @@ cancellation. Input integration uses actual OrbitControls to check event ownersh
 Water tests cover initially empty, timed filling, retained water, top-only pouring,
 reduced motion, the bucket pivot, the visible stream and rope attachment. Lifecycle
 checks run the complete lower/fill/raise/pour cycle and verify that animation stops.
-Bucket click tests distinguish taps from drags and avoid duplicate native clicks.
+Bucket click tests distinguish taps from drags and avoid duplicate native clicks. The lifecycle test also asserts that the bucket button carries no `aria-expanded`, because it moves the bucket and is not a disclosure.
 
 Stage tests cover continuous staggered reveal, reversed movement, projection onto
 all five real course gaps, angled connector endpoints, minimum spacing, reduced
@@ -61,6 +61,6 @@ specific to the fixed header and short final contact section.
 
 The model launcher is tested separately for automatic startup after the first
 paint, duplicate events, loading/error announcements, preserved keyboard focus,
-Data Saver, and navigation or bfcache transitions during loading. Asset-version
+Data Saver, and navigation or bfcache transitions during loading. The static fallback (`.is-static` on the figure) is asserted for a failed model and for Data Saver, and absent after a successful start. A further test checks that starting the model adds `modulepreload` links for both Three.js modules, resolved through the import map, once; the fixture stubs `import.meta.resolve`. Asset-version
 checks cover deterministic hashing, complete import maps, both locales, and stale
 or malformed generated metadata.

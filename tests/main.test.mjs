@@ -62,11 +62,21 @@ function createPage(options = {}) {
     links.push(link);
   }
   for (const id of options.missing ?? []) elements.delete(id);
+  const depthMarks = (options.depthMarks ?? []).map((id) => ({
+    textContent: "0",
+    writes: 0,
+    closest: (selector) => (selector === "section" ? elements.get(id) ?? null : null),
+  }));
+  for (const mark of depthMarks) {
+    let text = mark.textContent;
+    Object.defineProperty(mark, "textContent", { get: () => text, set(value) { text = value; mark.writes++; } });
+  }
 
   const document = {
     documentElement: { lang: options.lang ?? "cs", scrollHeight: options.scrollHeight ?? 5000 },
     getElementById: (id) => elements.get(id) ?? null,
     querySelectorAll(selector) {
+      if (selector === "[data-depth]") return depthMarks;
       assert.equal(selector, ".nav a[href^='#']");
       return links;
     },
@@ -74,7 +84,7 @@ function createPage(options = {}) {
   runInNewContext(source, { window, document, Date });
 
   return {
-    window, document, elements, links, frames,
+    window, document, elements, links, frames, depthMarks,
     emit(name) {
       for (const handler of events.get(name) || []) handler();
     },
@@ -285,4 +295,27 @@ test("a missing year element does not prevent the remaining enhancements", () =>
   const page = createPage({ missing: ["year"], scrollY: 2000 });
   assert.equal(page.elements.get("depthReadout").textContent, "−21,0 m");
   assert.deepEqual(page.current(), ["#pribeh"]);
+});
+
+test("section marks show the gauge reading at which each section reaches the header", () => {
+  const page = createPage({ depthMarks: ["kovarna", "pribeh", "dno", "missing"] });
+  // 4000px of scroll range and a 105px activation line: (top - 105) / 4000 * 42.
+  assert.deepEqual(page.depthMarks.map((mark) => mark.textContent), ["9", "20", "42", "0"]);
+});
+
+test("section marks are measured again after layout changes but not while scrolling", () => {
+  const page = createPage({ depthMarks: ["kovarna"] });
+  const [mark] = page.depthMarks;
+  assert.equal(mark.writes, 1);
+  page.scrollTo(2000);
+  assert.deepEqual([mark.textContent, mark.writes], ["9", 1]);
+  page.elements.get("kovarna").top = 2105;
+  page.emit("resize");
+  page.flush();
+  assert.deepEqual([mark.textContent, mark.writes], ["21", 2]);
+});
+
+test("a page that cannot scroll keeps the authored section marks", () => {
+  const page = createPage({ depthMarks: ["kovarna"], scrollHeight: 1000 });
+  assert.deepEqual([page.depthMarks[0].textContent, page.depthMarks[0].writes], ["0", 0]);
 });

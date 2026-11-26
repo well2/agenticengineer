@@ -136,11 +136,10 @@
 }
 
 @media (max-width: 640px) {
-  .wordmark { display: none; }
   .brand { flex-shrink: 0; }
   .nav {
-    font-size: 0.78rem;
-    gap: 0.2rem 0.85rem;
+    font-size: 0.74rem;
+    gap: 0.2rem 0.4rem;
     flex-wrap: wrap;
     justify-content: flex-end;
     align-items: center;
@@ -218,11 +217,6 @@ main > section {
   justify-self: center;
 }
 
-.well-scene {
-  width: 100%;
-  height: auto;
-}
-
 .hero-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -254,14 +248,13 @@ main > section {
 
 @media (max-width: 900px) {
   .hero-inner { grid-template-columns: minmax(0, 1fr); }
-  .hero-well { max-width: 170px; order: -1; margin-top: 0.5rem; }
   .hero-stats { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* story — background one step deeper */
 .strata { background: var(--ink-1); }
 
-/* smithy */
+/* Forge */
 .forge-sec {
   background:
     radial-gradient(900px 420px at 85% 0%, rgba(255, 122, 24, 0.06), transparent 60%),
